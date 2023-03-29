@@ -1,0 +1,167 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+@layer components {
+    /* button  */
+    .btn {
+        @apply py-3 px-3 rounded-sm;
+    }
+    .btn-success {
+        @apply bg-[#AEEC6B] text-white w-full font-bold hover:bg-[#92D050];
+    }
+    .btn-border {
+        @apply border text-sky-500 border-sky-500 text-sm font-semibold hover:bg-sky-500 hover:text-white transition-all duration-100;
+    }
+
+    /* left side bar */
+    .side-container {
+        @apply bg-white drop-shadow-md w-[430px]  h-full;
+    }
+
+    /* left sidebar logo */
+    .logo-container {
+        @apply bg-white px-3 w-full h-[270px] flex items-center justify-center flex-col;
+    }
+    .samson-logo {
+        @apply w-[150px] h-[150px] rounded-full flex-shrink-0 mt-16;
+    }
+    .logo-text {
+        @apply mt-auto tracking-wider font-bold text-slate-700 whitespace-nowrap;
+    }
+
+    /* navlinks for left side */
+    .nav-wrapper {
+        @apply h-full w-full pl-10 bg-white;
+    }
+    .ul-container {
+        @apply flex flex-col bg-white h-full w-full;
+    }
+    .ul-container-list {
+        @apply w-full h-[60px] rounded-bl-md rounded-tl-md flex items-center bg-white;
+    }
+    .ul-list-anchor {
+        @apply text-slate-700 flex items-center gap-3 bg-white w-full h-full hover:bg-gray-100 rounded-tl-md rounded-bl-md pl-3;
+    }
+
+    /* navbar */
+
+    .header-section {
+        @apply w-full h-[60px] py-2 px-7 bg-white drop-shadow-sm;
+    }
+    .header-nav {
+        @apply w-full h-full flex;
+    }
+    .menu-wrapper {
+        @apply flex-1 flex items-center bg-white;
+    }
+    .header-user-info-container {
+        @apply flex-1 flex justify-end gap-3 items-center;
+    }
+    .header-user-box {
+        @apply flex flex-col;
+    }
+    .header-username {
+        @apply text-slate-700 whitespace-nowrap;
+    }
+    .header-user-role {
+        @apply text-right text-gray-500 text-xs;
+    }
+
+
+    /* dropdown box settings toggle */
+    .dropdown-box-container {
+        @apply bg-white shadow text-white w-36 h-36 absolute top-10 right-1 transition-opacity duration-200 p-2 hidden;
+    }
+    .dropdown-box-container-div {
+        @apply w-full h-full flex flex-col;
+    }
+    .dropdown-box-container-profile-container {
+        @apply border-b-[1px] border-[gray] pb-1 w-full flex items-center gap-1;
+    }
+    .dropdown-box-container-profile-username {
+        @apply text-sm text-slate-700;
+    }
+    .dropdown-box-container-nav {
+        @apply  flex-1 flex items-center text-gray-500 bg-white;
+    }
+    .dropdown-box-container-list {
+        @apply  w-full flex flex-col bg-white;
+    }
+    .dropdown-box-list {
+        @apply hover:bg-gray-50 w-full p-1 rounded-md;
+    }
+    .dropdown-box-link {
+        @apply  flex items-center justify-between text-sm;
+    }
+    .dropdown-box-span {
+        @apply  flex items-center justify-between text-sm;
+    }
+
+
+}
+
+
+/* dropdown box settings toggle */
+@layer utilities {
+    .toggle {
+        @apply block;
+        /* @apply block; */
+    }
+    .active {
+        @apply bg-gray-50 font-bold !text-sky-500 rounded-tl-md rounded-bl-md;
+    }
+}
+
+#scroll-custom::-webkit-scrollbar {
+    width: 1.5vh;
+}
+#scroll-custom::-webkit-scrollbar-thumb{
+    background: #f9fafb;
+}
+
+
+#scroll-custom::-webkit-scrollbar-track{
+    background-color: #e5e7eb;
+}
+
+
+/* search employee scrollbar wrapper  */
+#search-scrollbar::-webkit-scrollbar {
+    width: .5vw;
+    background-color: #f3f4f6;
+}
+#search-scrollbar::-webkit-scrollbar-thumb{
+    background: #d1d5db;
+}
+#search-scrollbar::-webkit-scrollbar-thumb:hover{
+    background: #9ca3af;
+}
+
+
+/* form registraion scrollbar wrapper */
+#registration-wrapper::-webkit-scrollbar-track{
+    background-color: #e5e7eb;
+}
+
+
+#registration-wrapper::-webkit-scrollbar {
+    width: .7vw;
+    background-color: #f3f4f6;
+}
+#registration-wrapper::-webkit-scrollbar-thumb{
+    background: #d1d5db;
+}
+#registration-wrapper::-webkit-scrollbar-thumb:hover{
+    background: #9ca3af;
+}
+
+
+#registration-wrapper::-webkit-scrollbar-track{
+    background-color: #e5e7eb;
+}
+
+
+
+
