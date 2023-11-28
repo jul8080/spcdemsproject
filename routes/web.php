@@ -23,6 +23,26 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+// use Illuminate\Support\Facades\Hash;
+// use App\Helpers\Helper;
+// use App\Models\User;
+// Route::get('/create', function() {
+//     $qrcode = Helper::QRCodeGenerator(new User, 'qrcode', 6, 'SPCD');
+//     App\Models\User::create([
+//         'school_id' => 999,
+//         'qrcode' => $qrcode,
+//         'last_name' => 'Mukatil',
+//         'first_name' => 'Jul',
+//         'middle_name' => 'Punding',   
+//         'department' => 'IT',
+//         'position' => 'President',
+//         'gender' => 'male',
+//         'entry_level' => 'none',
+//         'email' => 'j@yahoo.com',
+//         'password' => Hash::make('admin123456789'),
+//         'new_user' => '2023-11-16 00:00:00'
+//     ]);
+// });
 
 Route::prefix('admin')->middleware(['auth', 'isAdmin', 'PreventBackHistory'])->name('admin.')->group(function(){
 
