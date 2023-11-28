@@ -12,9 +12,11 @@ class ContactInformation extends Component
      * @return void
      */
     public $contactInfo;
-    public function __construct($contactInfo)
+    public $user;
+    public function __construct($contactInfo, $user)
     {
         $this->contactInfo=$contactInfo;
+        $this->user=$user;
     }
 
     /**

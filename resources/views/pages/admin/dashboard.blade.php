@@ -4,7 +4,6 @@
 
     <div class="h-full w-full p-3">
         <div class="h-full flex flex-col">
-
             <div class="flex items-center justify-between h-28 relative">
                 <div class="flex items-center">
                     <span class="material-symbols-outlined text-gray-400 text-5xl">

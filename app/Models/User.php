@@ -3,6 +3,7 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Models\Log;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Support\Facades\Cache;
 use App\Models\UserPersonalInformation;
@@ -22,6 +23,7 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'school_id',
+        'qrcode',
         'first_name',
         'last_name',
         'middle_name',
@@ -74,5 +76,9 @@ class User extends Authenticatable
     public function attendances()
     {
         return $this->hasMany(Attendance::class, 'user_id', 'id');
+    }
+    public function logs()
+    {
+        return $this->hasMany(Log::class, 'user_id', 'id');
     }
 }

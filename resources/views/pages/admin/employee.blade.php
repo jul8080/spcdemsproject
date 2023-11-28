@@ -14,7 +14,7 @@
                 </div>
             </div>
             {{-- table --}}
-            <div class="flex-1 flex flex-col">
+            <!-- <div class="flex-1 flex flex-col">
                 <div class="h-[80px] w-full flex items-center justify-between">
                     <form action="{{ url('/admin/employee') }}" method="GET">
                         <div class="flex items-center">
@@ -90,7 +90,7 @@
 
                                 </td>
                                  <td>
-                                    <a href="javascript:void(0)" onclick="editEmployee({{ $user->id }})" class="material-symbols-outlined text-[#00B0F0]" id="show-wrapper">
+                                    <a href="javascript:void(0)" onclick="editEmployee( '{{ $user->id }}' )" class="material-symbols-outlined text-[#00B0F0]" id="show-wrapper">
                                         edit_square
                                     </a>
                                 </td>
@@ -120,10 +120,10 @@
                         {{ $users->appends(['search'=>request()->query('search')])->links('pagination::tailwind') }}
                     </div>
                 </div>
-            </div>
-
+            </div> -->
+            <employee-component></employee-component>
             {{-- edit department & position --}}
-            <div class="bg-gray-500/50 h-full w-full absolute left-0 top-0 hidden items-center justify-center" id="wrapper">
+            <!-- <div class="bg-gray-500/50 h-full w-full absolute left-0 top-0 hidden items-center justify-center" id="wrapper">
                 {{-- <x-user-permission data="wrapper" /> --}}
                 <div class="w-[500px] bg-white flex flex-col rounded-md">
                     <div class="border-b-[1px] h-14 flex items-center justify-between px-5">
@@ -182,14 +182,14 @@
                         </div>
                     </form>
                 </div>
-            </div>
+            </div> -->
             {{-- edit department & position ends here--}}
         </div>
 
         {{-- registration from for employees --}}
-        <div class="bg-white shadow w-[500px] h-full absolute top-0 -right-[50rem] overflow-x-hidden" id="registration-wrapper">
+        <!-- <div class="bg-white shadow w-[500px] h-full absolute top-0 -right-[50rem] overflow-x-hidden" id="registration-wrapper">
             <x-user-registration wrapper="wrapper" :todayDate="$todayDate" />
-        </div>
+        </div> -->
         {{-- registration from for employees ends here--}}
 
     </div>

@@ -14,7 +14,7 @@
                 </div>
             </div>
             {{-- table --}}
-            <div class="flex-1 flex flex-col">
+            <!-- <div class="flex-1 flex flex-col">
                 <div class="h-[80px] w-full flex items-center justify-end">
                     {{-- <form action="{{ url('/admin/attendance') }}" method="GET" class="w-full flex justify-between items-center">
                         @csrf
@@ -101,7 +101,8 @@
                         {{ $attendances->appends(['date'=>request()->query('date'), 'time_status'=>request()->query('time_status')])->links('pagination::tailwind') }}
                     </div>
                 </div>
-            </div>
+            </div> -->
+            <attendance-component></attendance-component>
         </div>
 
     </div>

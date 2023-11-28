@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\AdminProfileController;
 use App\Http\Controllers\Admin\SamsonEmployeeController;
 use App\Http\Controllers\Auth\UserController;
 use App\Http\Controllers\Admin\ProfileSettingsController;
+use App\Http\Controllers\ScannerController;
 use App\Http\Controllers\User\EmployeeAttendance;
 use App\Http\Controllers\User\DetailController;
 use App\Http\Controllers\User\EmergencyContactInformation;
@@ -11,7 +12,6 @@ use App\Http\Controllers\User\SettingsController;
 use App\Http\Controllers\User\UserRoleController;
 use GuzzleHttp\Middleware;
 use Illuminate\Support\Facades\Route;
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -22,8 +22,26 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
-
+// use Illuminate\Support\Facades\Hash;
+// use App\Helpers\Helper;
+// use App\Models\User;
+// Route::get('/create', function() {
+//     $qrcode = Helper::QRCodeGenerator(new User, 'qrcode', 6, 'SPCD');
+//     App\Models\User::create([
+//         'school_id' => 999,
+//         'qrcode' => $qrcode,
+//         'last_name' => 'Mukatil',
+//         'first_name' => 'Jul',
+//         'middle_name' => 'Punding',   
+//         'department' => 'IT',
+//         'position' => 'President',
+//         'gender' => 'male',
+//         'entry_level' => 'none',
+//         'email' => 'j@yahoo.com',
+//         'password' => Hash::make('admin123456789'),
+//         'new_user' => '2023-11-16 00:00:00'
+//     ]);
+// });
 Route::prefix('admin')->middleware(['auth', 'isAdmin', 'PreventBackHistory'])->name('admin.')->group(function(){
 
     Route::controller(SamsonEmployeeController::class)->group(function()
@@ -38,6 +56,11 @@ Route::prefix('admin')->middleware(['auth', 'isAdmin', 'PreventBackHistory'])->n
         Route::get('/employee/{id}', 'Profile')->name('profile');
         Route::post('/search/user', 'searchUser')->name('search.employee');
         Route::put('/user/store', 'userStore')->name('user.store');
+
+        // logs api
+        Route::get('/api-logs', 'employeelogs');
+        Route::get('/view-log/{id}', 'viewLog');
+        Route::get('/user-lists', 'users');
     });
 
     Route::controller(AdminProfileController::class)->group(function(){
@@ -48,6 +71,7 @@ Route::prefix('admin')->middleware(['auth', 'isAdmin', 'PreventBackHistory'])->n
     Route::controller(UserController::class)->group(function()
     {
         // Route::get('/create/employee', 'createEmployee')->name('create.employee');
+        // Route::get('/create', 'create')->name('create');
         Route::post('/create/employee', 'storeEmployee')->name('store.employee');
     });
     // admin panel settings
@@ -135,6 +159,15 @@ Route::prefix('user')->middleware(['auth', 'isUser', 'PreventBackHistory'])->nam
         Route::post('/attendance/store', 'storeTime')->name('store.attendance');
 
     });
+
+});
+
+Route::controller(ScannerController::class)->group(function(){
+
+    Route::get('/scanner', 'index');
+    Route::get('/scanner/logs', 'logs');
+    Route::post('/scanner/store', 'store');
+    Route::get('/test', 'test');
 
 });
 

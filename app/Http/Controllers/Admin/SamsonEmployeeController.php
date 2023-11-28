@@ -12,9 +12,39 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use App\Models\EmergencyContactInformation;
+use App\Helpers\Helper;
+use App\Models\Log;
 
 class SamsonEmployeeController extends Controller
 {
+    public function users() {
+        $users = User::latest()->get();
+        return response()->json([
+            'status' => 200,
+            'users' => $users
+        ], 200);
+    }
+    public function viewLog($id) {
+        $log = Log::find($id);
+        return response()->json([
+            'status' => 200,
+            'log' => $log
+        ], 200);
+    }
+    public function employeelogs() {
+        $logs = Log::latest()->paginate(10);
+        if ($logs->count() > 0) {
+            return response()->json([
+                'status' => 200,
+                'attendace' => $logs
+            ], 200);
+        } else {
+            return response()->json([
+                'status' => 404,
+                'message' => 'No logs found!'
+            ], 404);
+        }
+    }
     public function homePage(Request $request)
     {
 
@@ -35,9 +65,10 @@ class SamsonEmployeeController extends Controller
 
     public function employeePage()
     {
-        // $users = User::
-        //         whereNotNull('last_seen')
-        //         ->orderBy('last_seen', 'DESC')->get();
+       
+        $users = User::
+                whereNotNull('last_seen')
+                ->orderBy('last_seen', 'DESC')->get();
         $todayDate = Carbon::today();
 
         $search = request()->query('search');
@@ -92,7 +123,7 @@ class SamsonEmployeeController extends Controller
             $attendances = Attendance::where('created_at', 'LIKE', '%' . $request->date . '%')->latest()->paginate(5);
         }
 
-        return view('pages.admin.attendance', compact('attendances', 'todayDate'));
+        return view('pages.admin.attendance', compact('todayDate', 'attendances'));
     }
     public function userPage()
     {
@@ -118,10 +149,7 @@ class SamsonEmployeeController extends Controller
             $user->department = $request->department;
             $user->position = $request->position;
             $user->update();
-            return response()->json([
-                'status' => 1,
-                'success' => 'updated successfully'
-            ]);
+            return redirect()->back();
         } else {
             return response()->json(['status' =>0,'fail' => $validation->errors()->all()]);
         }

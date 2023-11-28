@@ -11,13 +11,17 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Validator;
-
+use App\Helpers\Helper;
 class UserController extends Controller
 {
+    // public function create() {
+    //     return view('pages.admin.registerform');
+    // }
 
     public function storeEmployee(Request $request)
     {
         $todayDate = Carbon::today();
+        $qrcode = Helper::QRCodeGenerator(new User, 'qrcode', 6, 'SPCD');
         $validation = Validator::make($request->all(), $messages=[
             'school_id'   => 'required',
             'new_user'    => 'required',
@@ -36,6 +40,7 @@ class UserController extends Controller
             User::create([
                 'new_user'    => $request->new_user,
                 'school_id'   => $request->school_id,
+                'qrcode'      => $qrcode,
                 'first_name'  => $request->first_name,
                 'last_name'   => $request->last_name,
                 'middle_name' => $request->middle_name,

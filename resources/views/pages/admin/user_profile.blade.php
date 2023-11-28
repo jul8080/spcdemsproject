@@ -50,7 +50,7 @@
                 <span class="material-symbols-outlined text-3xl text-gray-400">
                     account_box
                 </span>
-                <span class="font-semibold text-2xl text-gray-400">Profile Detail</span>
+                <span class="font-semibold text-2xl text-gray-400">Profile Detail </span>
             </div>
             <div class="flex-1 pt-5 flex flex-col">
                 <ul class="flex flex-col gap-5">

@@ -139,9 +139,9 @@
 </div>
 
 <script src="{{ asset('js/jquery-3.6.3.min.js') }}"></script>
-<script>
+<!-- <script>
     $('nav ul li').click(function(e){
         $(this).addClass('active').siblings().removeClass('active');
     });
 
-</script>
+</script> -->

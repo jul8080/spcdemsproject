@@ -63,7 +63,7 @@
             <x-personal-information :personalInfo="$personalInfo" :user="$user" />
         </div>
         <div class="flex-1 border">
-            <x-contact-information :contactInfo="$contactInfo" />
+            <x-contact-information :contactInfo="$contactInfo" :user="$user" />
         </div>
     </div>
     <div class="bg-gray-500/60 w-full absolute h-full hidden" id="showForm">

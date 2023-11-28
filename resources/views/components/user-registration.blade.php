@@ -17,9 +17,11 @@
                 <input type="text" name="school_id" class="focus:ring-1 focus:bg-white bg-gray-50 py-1 pl-2 outline-none w-full" value="{{ old('school_id') }}">
                 <span class="text-xs text-red-500" id="error-school_id"><span>
             </div>
+
             <div class="flex flex-col">
                 <input type="hidden" name="new_user" class="bg-gray-50 py-1 pl-2 outline-none w-full"  value="{{ $todayDate }}">
             </div>
+            
             <div class="flex flex-col">
                 <label for="first_name" class="text-sm">First name</label>
                 <input type="text" name="first_name" class="focus:ring-1 focus:bg-white bg-gray-50 py-1 pl-2 outline-none w-full"  value="{{ old('first_name') }}">
