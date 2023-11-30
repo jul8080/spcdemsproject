@@ -50,8 +50,8 @@
                             </tbody>
                             <tbody v-else>
                                 <tr class="odd:bg-gray-100 even:bg-gray-50 h-14 text-justify">
-                                    <td colspan="8" class="text-sm font-semibold text-slate-500 capitalize pl-5">{{
-                                        error_message }}
+                                    <td colspan="8" class="text-sm font-semibold text-slate-500 capitalize pl-5">
+                                        {{ message }}
                                     </td>
                                 </tr>
                             </tbody>
@@ -67,20 +67,18 @@
                         class="opacity-20 absolute h-full w-full top-0 right-0 bottom-0 left-0 m-auto object-cover">
                     <div class="bg-[#00B0F0]/10 w-full h-full absolute top-0 right-0 bottom-0 left-0 m-auto"></div>
                     <div class="bg-white w-80 h-80 flex items-center flex-col z-10">
-                        <div class="bg-green-500 w-full h-full p-3 relative" :class="error ? 'bg-red-400' : 'bg-green-500'">
-                            <div class="bg-white w-[200px] h-full absolute bottom-0 left-0 right-0 top-0 m-auto"></div>
-                            <div class="bg-white w-[200px] h-full absolute rotate-90 bottom-0 left-0 right-0 top-0 m-auto"></div>
-                            <div class="bg-white  w-full h-full p-1">
+                        <div class="bg-green-500 w-full h-full p-3 relative">
+                            <div class="bg-white w-[200px] h-full absolute bottom-0 left-0 right-0 top-0 m-auto"/>
+                            <div class="bg-white w-[200px] h-full absolute rotate-90 bottom-0 left-0 right-0 top-0 m-auto"/>
+                            <div class="bg-white  w-full h-full">
                                 <qrcode-stream @init="onInit" @decode="onDecode" :track="drawOutline"></qrcode-stream>
                             </div>
                         </div>
                       
                     </div>
-                    <span 
-                        class="font-mono font-extrabold text-slate-300"
-                        :class="error ? 'hidden' : 'block'"
-                    ><i class="fa-solid fa-qrcode"></i> Tap your QRCode here.</span>
-                    <span class="text-red-400 font-bold" v-if="error != ''">{{ error }}</span>
+                    <span class="font-mono font-extrabold text-slate-300">
+                        <i class="fa-solid fa-qrcode"></i> Tap your QRCode here.
+                    </span>
                 </div>
             </div>
         </div>
@@ -99,11 +97,10 @@ export default {
     data() {
         return {
             loading: false,
-            error: '',
+            message: '',
             decodeString: '',
             logs: { 'data': [] },
             category: 'all',
-            error_message: '',
             formattedDay: useDateFormat(useNow(), "dddd", { locales: 'en-US' }),
             formattedDate: useDateFormat(useNow(), "MM/DD/YYYY", { locales: 'en-US' }),
         }
@@ -154,8 +151,8 @@ export default {
                         'date': this.formattedDate
                     })
                     .then(res => {
-                        this.error = res.data.message
-                        console.log(res.data.message)
+                        this.message = res.data.message
+                        console.log(this.message)
                     }).catch(err => {
                         console.log(err.message)
                     })

@@ -1,13 +1,14 @@
 <template>
     <transition name="modal-animation" >
-        <div v-show="modalActive" class="modal">
-            <transition name="moda-animation-inner"> 
+        <div v-show="modalActive" :class="{
+            'bg-white bg-opacity-0 fixed inset-y-0 inset-x-0 m-auto flex items-center justify-center' : type == 'secondary',
+            'bg-[#000000] bg-opacity-50 fixed inset-y-0 inset-x-0 m-auto flex items-center justify-center' : type == 'primary'
+        }">
+            <slot />
+            <!-- <transition name="moda-animation-inner"> 
                 <div v-show="modalActive" class="modal-inner" >
-                    <!-- Modal content -->
-                    <slot />
-                    <!-- <button @click="closeModal">Close</button> -->
                 </div>
-            </transition>
+            </transition> -->
         </div>
     </transition>
 </template>
@@ -16,7 +17,9 @@
     import { onClickOutside } from '@vueuse/core'
     import { ref, onMounted, onUnmounted } from 'vue'
     export default {
-        props: ['modalActive', 'target'],
+
+        props: ['modalActive', 'target', 'class', 'type'],
+
         setup(props, {emit}) {
             const target = ref(null)
             const closeModal = () => {
@@ -42,21 +45,21 @@
 .modal-animation-leave-to{
     opacity: 0;
 }
-.moda-animation-inner-enter-active {
-    transition: all .3s cubic-bezier(0.52, 0.02, 0.19, 1.02) 0.15s;
-}
-.moda-animation-inner-leave-active {
-    transition: all .3s cubic-bezier(0.52, 0.02, 0.19, 1.02);
-}
-.moda-animation-inner-enter-from {
-    opacity: 0;
-    transform: scale(0.8);
-}
-.moda-animation-inner-leave-to {
-    transform: scale(0.8);
-}
+// .moda-animation-inner-enter-active {
+//     transition: all .3s cubic-bezier(0.52, 0.02, 0.19, 1.02) 0.15s;
+// }
+// .moda-animation-inner-leave-active {
+//     transition: all .3s cubic-bezier(0.52, 0.02, 0.19, 1.02);
+// }
+// .moda-animation-inner-enter-from {
+//     opacity: 0;
+//     transform: scale(0.8);
+// }
+// .moda-animation-inner-leave-to {
+//     transform: scale(0.8);
+// }
 .modal{
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: rgba(255, 255, 255, 0.2);
     position: fixed;
     top: 0;
     left: 0;
@@ -67,9 +70,5 @@
     justify-content: center;
     padding: 20px 0px 20px 0px;
 }
-.modal-inner {
-    background-color: white;
-    width: 700px;
-    height: 100%;
-}
+
 </style>

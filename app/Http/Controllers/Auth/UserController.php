@@ -55,9 +55,10 @@ class UserController extends Controller
                 'success' => 'Employee account successfully registered.'
             ]);
         } else {
-            // return response()->json(['status' =>0,'fail' => $validation->errors()->all()]);
             return response()->json(['status' =>0,'fail' => $validation->messages()]);
         }
+        // return response()->json(['status' =>0,'fail' => $validation->messages()]);
+        // return response()->json(['status' =>0,'fail' => $validation->errors()->all()]);
     }
 
     public function userLogin()

@@ -115,17 +115,17 @@ export default {
         const toggleModal = () => {
             modalActive.value = !modalActive.value
         }
+        const printAttendance = () => {
+            const { paperize } = usePaperizer(print.value)
+            paperize()
+        }
+        onClickOutside(target, () => modalActive.value = false)
         const handleClose = (event) => {
             console.log('closing modal')
             if (event.key == 'Escape') {
                 modalActive.value = false
             }
         }
-        const printAttendance = () => {
-            const { paperize } = usePaperizer(print.value)
-            paperize()
-        }
-        onClickOutside(target, () => modalActive.value = false)
 
         onMounted(() => {
             document.addEventListener('keyup', handleClose)

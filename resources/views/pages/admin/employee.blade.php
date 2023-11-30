@@ -121,7 +121,7 @@
                     </div>
                 </div>
             </div> -->
-            <employee-component></employee-component>
+            <employee-component date="{{ $todayDate }}"></employee-component>
             {{-- edit department & position --}}
             <!-- <div class="bg-gray-500/50 h-full w-full absolute left-0 top-0 hidden items-center justify-center" id="wrapper">
                 {{-- <x-user-permission data="wrapper" /> --}}
