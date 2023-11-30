@@ -127,17 +127,6 @@ export default {
                 this.loading = false
                 console.log('Done fetching!')
             }
-
-            // axios.get(`/scanner/logs?page=${page}`)
-            //     .then(res => {
-            //         this.logs = res.data.users
-            //         const count = this.logs.data.filter(x => x.status == '1')
-            //         console.log(count.length)
-            //     })
-            //     .catch(err => {
-            //         this.error_message = err.response.data.message;
-            //         console.log(this.error_message)
-            //     })
         },
         async onDecode(decodeString) {
             this.decodeString = decodeString

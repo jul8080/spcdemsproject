@@ -2,18 +2,16 @@
 
     {{-- sidebar logo  --}}
 
-    <div class="bg-white w-full h-[100px] flex items-center pl-5 border-b-[1px] border-gray-50">
-        <div><img src="{{ asset('images/samson.png') }}" class="w-16 h-16"></div>
-        <div class="-space-y-1 flex flex-col ml-1">
-            <h2 class="text-[#4472C4] font-bold tracking-[.2rem] uppercase">spcd</h2>
-            <span class="text-[#4472C4] text-[10px] capitalize">employee management system</span>
+    <div class="bg-white w-full h-[200px] flex items-center justify-center border-b-[1px] border-gray-50">
+        <div class="w-full h-full">
+            <img src="{{ asset('images/logo-trans-3.png') }}" class="w-full h-full object-cover">
         </div>
     </div>
 
     {{-- sidebar nav links --}}
 
     <div class="flex-1">
-        <nav class="h-full">
+        <nav class="h-full -mt-[30px]">
             <h2 class="uppercase font-bold text-gray-400 pl-5 pt-10">general</h2>
             @if (Auth::user()->role_as == 'admin')
             <ul class="">
@@ -41,14 +39,6 @@
                         <span class="capitalize text-gray-400 font-semibold">attendance</span>
                     </a>
                 </li>
-                {{-- <li class="h-14 flex items-center ml-5">
-                    <a href="{{ route('admin.users') }}" class="flex items-center gap-[.3rem] hover:bg-gray-50 w-full h-full pl-5 rounded-tl-md rounded-bl-md">
-                        <span class="material-symbols-outlined text-gray-400">
-                            person
-                        </span>
-                        <span class="capitalize text-gray-400 font-semibold">users</span>
-                    </a>
-                </li> --}}
             </ul>
             @else
             {{-- user sidebar --}}
@@ -139,9 +129,4 @@
 </div>
 
 <script src="{{ asset('js/jquery-3.6.3.min.js') }}"></script>
-<!-- <script>
-    $('nav ul li').click(function(e){
-        $(this).addClass('active').siblings().removeClass('active');
-    });
 
-</script> -->

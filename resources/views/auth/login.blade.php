@@ -59,11 +59,9 @@
         {{-- ************************employee login form desktop & laptop version*************************** --}}
 
     <div class="bg-white m-auto w-[900px] h-[500px] rounded-md flex shadow">
-        <div class="bg-gray-50 flex-1 flex items-center justify-center flex-col">
-            <img src="{{ asset('images/samson.png') }}" class="h-72 w-72">
-            <div class="flex flex-col justify-center items-center">
-                <h2 class="uppercase font-bold text-[#4472C4] tracking-[.3em] text-4xl">spcd</h2>
-                <span class="capitalize font-bold text-[#4472C4] tracking-widest text-sm">employee manangement system</span>
+        <div class="bg-gray-50 flex-1 flex items-center justify-center flex-col p-10">
+            <div class=" w-full h-full">
+                <img src="{{ asset('images/logo-trans-1.png') }}" class="h-full w-full object-cover">
             </div>
         </div>
         <div class="flex-1 flex flex-col justify-center items-center bg-white relative">

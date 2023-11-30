@@ -65,7 +65,7 @@
                     <!-- Modal content -->
                     <div class="bg-[#f1f1f1] h-[300px] flex items-center justify-center py-5">
                         <div class="w-full h-full flex items-center justify-center">
-                            <img src="../../assets/images/recordit.png" alt="recordit-png"
+                            <img src="../../assets/images/logo-trans-1.png" alt="recordit-png"
                                 class="object-contain h-[750px] w-[750px]">
                         </div>
                     </div>
