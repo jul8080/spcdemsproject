@@ -42,8 +42,8 @@
                 </div>
             </li>
         </ul>
-        <div class="flex-1 h-full flex items-center justify-center">
+        <!-- <div class="flex-1 h-full flex items-center justify-center"> -->
             <!-- <qrcode-component qrcode="{{$user->qrcode}}" name="{{$user->last_name}}"></qrcode-component> -->
-        </div>
+        <!-- </div> -->
     </div>
 </div>

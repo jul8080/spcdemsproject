@@ -43,11 +43,17 @@ Route::prefix('admin')->middleware(['auth', 'isAdmin', 'PreventBackHistory'])->n
         Route::get('/api-logs', 'employeelogs');
         Route::get('/view-log/{id}', 'viewLog');
         Route::get('/user-lists', 'users');
+        Route::get('/user/logs-csve-xport', 'exportLogs');
     });
 
     Route::controller(AdminProfileController::class)->group(function(){
         Route::get('/profile', 'adminProfile')->name('profile');
         Route::post('/change/photo', 'updatePhoto')->name('change.photo');
+
+        // api
+        Route::get('/data', 'userInfo');
+        Route::get('/image', 'getImage');
+        Route::post('/upload-image', 'uploadImage');
     });
 
     Route::controller(UserController::class)->group(function()
@@ -106,6 +112,11 @@ Route::prefix('user')->middleware(['auth', 'isUser', 'PreventBackHistory'])->nam
 
 
         Route::post('/change/photo', 'changePhoto')->name('change.photo');
+
+        // api
+        Route::get('/data', 'userInfo');
+        Route::get('/image', 'getImage');
+        Route::post('/upload-image', 'uploadImage');
     });
 
 
@@ -140,6 +151,8 @@ Route::prefix('user')->middleware(['auth', 'isUser', 'PreventBackHistory'])->nam
         Route::get('/attendance', 'attendancePage')->name('attendance');
         Route::post('/attendance/store', 'storeTime')->name('store.attendance');
 
+        // api
+        Route::get('/logs-api', 'logs');
     });
 
 });

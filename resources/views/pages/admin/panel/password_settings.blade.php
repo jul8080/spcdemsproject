@@ -36,7 +36,7 @@
                         <div class="flex flex-col gap-2 w-[400px]">
                         <div class="flex w-full gap-1">
                             <div class="flex-1 flex items-center justify-end">
-                                <label for="current_password" class="text-gray-500 font-semibold">Current password</label>
+                                <label  class="text-gray-500 font-semibold">Current password</label>
                             </div>
                             <div class="flex-1 flex items-center gap-2">
                                 <input type="password" name="current_password" class="flex-shrink-0 w-full outline-none caret-[#00B0F0] py-1 pl-2 focus:ring-1 bg-gray-50">
@@ -48,7 +48,7 @@
 
                         <div class="flex w-full gap-1">
                             <div class="flex-1 flex items-center justify-end">
-                                <label for="password" class="text-gray-500 font-semibold">New password</label>
+                                <label  class="text-gray-500 font-semibold">New password</label>
                             </div>
                             <div class="flex-1 flex items-center gap-2">
                                 <input type="password" name="password" class="flex-shrink-0 w-full outline-none caret-[#00B0F0] py-1 pl-2 focus:ring-1 bg-gray-50">
@@ -60,7 +60,7 @@
 
                         <div class="flex w-full gap-1">
                             <div class="flex-1 flex items-center justify-end">
-                                <label for="password_confirmation" class="text-gray-500 font-semibold">Confirmed password</label>
+                                <label  class="text-gray-500 font-semibold">Confirmed password</label>
                             </div>
                             <div class="flex-1 flex items-center gap-2">
                                 <input type="password" name="password_confirmation" class="flex-shrink-0 w-full outline-none caret-[#00B0F0] py-1 pl-2 focus:ring-1 bg-gray-50">

@@ -91,29 +91,26 @@
     {{-- sidebar user  --}}
 
     <div class="h-[100px] flex items-center pl-5 whitespace-nowrap border-t-[1px] border-gray-50">
-        @if (Auth::user()->image != '')
-        <div class="bg-slate-700 w-12 h-12 rounded-md flex items-center justify-center shadow">
-            <img src="{{ asset('images/'.Auth::user()->image) }}" class="object-cover  w-full h-full rounded-md">
-        </div>
+        <!-- user and admin image starts here -->
+        @if (Auth::user()->role_as == 'admin')
+            <adminimage-component></adminimage-component>
         @else
-        <div class="bg-slate-700 w-12 h-12 rounded-md flex items-center justify-center">
-            <span class="text-white font-sans uppercase text-3xl font-bold">{{ substr(Auth::user()->first_name, 0, 1) }}</span>
-        </div>
+            <userimage-component></userimage-component>
         @endif
-
+        <!-- user and admin image ends here -->
         <div class="flex-1 ml-2 -space-y-1">
             @if (Auth::user()->role_as == 'admin')
-            <a href="{{ url('admin/profile') }}" class="font-semibold hover:underline capitalize">{{ Auth::user()->first_name }} {{ Auth::user()->last_name }}</a>
-            <a href="{{ route('admin.profile.settings') }}" class="flex items-center group hover:underline w-14">
-                <span class="text-xs">{{ Auth::user()->role_as }}</span>
-                <img src="{{ asset('images/settings.png') }}" class="w-[.60rem] h-[.60rem] ml-2">
-            </a>
+                <a href="{{ url('admin/profile') }}" class="font-semibold hover:underline capitalize">{{ Auth::user()->first_name }} {{ Auth::user()->last_name }}</a>
+                <a href="{{ route('admin.profile.settings') }}" class="flex items-center group hover:underline w-14">
+                    <span class="text-xs">{{ Auth::user()->role_as }}</span>
+                    <img src="{{ asset('images/settings.png') }}" class="w-[.60rem] h-[.60rem] ml-2">
+                </a>
             @else
-            <a class="font-semibold capitalize">{{ Auth::user()->first_name }} {{ Auth::user()->last_name }}</a>
-            <a href="{{ route('user.profile.settings') }}" class="flex items-center group hover:underline w-14">
-                <span class="text-xs">{{ Auth::user()->role_as }}</span>
-                <img src="{{ asset('images/settings.png') }}" class="w-[.60rem] h-[.60rem] ml-2">
-            </a>
+                <a class="font-semibold capitalize">{{ Auth::user()->first_name }} {{ Auth::user()->last_name }}</a>
+                <a href="{{ route('user.profile.settings') }}" class="flex items-center group hover:underline w-14">
+                    <span class="text-xs">{{ Auth::user()->role_as }}</span>
+                    <img src="{{ asset('images/settings.png') }}" class="w-[.60rem] h-[.60rem] ml-2">
+                </a>
             @endif
         </div>
         <div class="flex justify-end pr-3 group">
@@ -124,9 +121,9 @@
                     <span class="material-symbols-outlined self-end hover:text-slate-900 text-slate-500">logout</span></a>
                 </button>
             </form>
+
         </div>
     </div>
 </div>
 
 <script src="{{ asset('js/jquery-3.6.3.min.js') }}"></script>
-

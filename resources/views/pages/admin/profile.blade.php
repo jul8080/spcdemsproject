@@ -1,7 +1,8 @@
 @extends('layouts.main')
 @section('content')
 <div class="h-full w-full p-3 flex gap-1 relative overflow-hidden">
-    <div class="w-[350px] h-full flex flex-col border p-5 ">
+    <prof-component></prof-component>
+    <!-- <div class="w-[350px] h-full flex flex-col border p-5 ">
         <div class="h-[180px] w-full  flex items-center">
             @if (Auth::user()->image != '')
                 <div class="flex items-center gap-2">
@@ -69,7 +70,7 @@
     <div class="bg-gray-500/60 w-full absolute h-full hidden" id="showForm">
 
         <x-change_photo/>
-    </div>
+    </div> -->
 </div>
 @endsection
 

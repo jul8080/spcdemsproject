@@ -10,10 +10,19 @@ use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
+use App\Models\Log;
 
 
 class EmployeeAttendance extends Controller
 {
+    public function logs(Request $request)
+    {
+        $log = Log::where('user_id', Auth::id())->latest()->paginate(5);
+        return response()->json([
+            'status' => 1,
+            'logs' => $log,
+        ]);
+    }
     public function attendancePage(Request $request)
     {
         $attendances = Attendance::where('user_id', Auth::id())->latest()->paginate(5);

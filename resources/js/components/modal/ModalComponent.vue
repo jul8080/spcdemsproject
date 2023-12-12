@@ -2,20 +2,17 @@
     <transition name="modal-animation" >
         <div v-show="modalActive" :class="{
             'bg-white bg-opacity-0 fixed inset-y-0 inset-x-0 m-auto flex items-center justify-center' : type == 'secondary',
-            'bg-[#000000] bg-opacity-50 fixed inset-y-0 inset-x-0 m-auto flex items-center justify-center' : type == 'primary'
+            'bg-[#000000] bg-opacity-10 fixed inset-y-0 inset-x-0 m-auto flex items-center justify-center' : type == 'primary'
         }">
             <slot />
-            <!-- <transition name="moda-animation-inner"> 
-                <div v-show="modalActive" class="modal-inner" >
-                </div>
-            </transition> -->
+
         </div>
     </transition>
 </template>
 
 <script>
     import { onClickOutside } from '@vueuse/core'
-    import { ref, onMounted, onUnmounted } from 'vue'
+    import { ref } from 'vue'
     export default {
 
         props: ['modalActive', 'target', 'class', 'type'],
@@ -28,11 +25,6 @@
             onClickOutside(target, closeModal)
             return {closeModal, target}
         }
-        // methods: {
-        //     closeModal() {
-        //         this.$emit('closeModal')
-        //     }
-        // }
     }
 </script>
 
@@ -45,19 +37,6 @@
 .modal-animation-leave-to{
     opacity: 0;
 }
-// .moda-animation-inner-enter-active {
-//     transition: all .3s cubic-bezier(0.52, 0.02, 0.19, 1.02) 0.15s;
-// }
-// .moda-animation-inner-leave-active {
-//     transition: all .3s cubic-bezier(0.52, 0.02, 0.19, 1.02);
-// }
-// .moda-animation-inner-enter-from {
-//     opacity: 0;
-//     transform: scale(0.8);
-// }
-// .moda-animation-inner-leave-to {
-//     transform: scale(0.8);
-// }
 .modal{
     background-color: rgba(255, 255, 255, 0.2);
     position: fixed;

@@ -30,12 +30,5 @@
                 <div class="flex-1 flex"><span class="capitalize text-gray-400">{{ $contactInfo->relationship ?? "" }}</span></div>
             </li>
         </ul>
-        @if($user->role_as == 'user')
-
-        @else
-        <div class="flex-1 h-full flex items-center justify-center">
-            <!-- <qrcode-component qrcode="{{$user->qrcode}}" name="{{$user->last_name}}"></qrcode-component> -->
-        </div>
-        @endif
     </div>
 </div>

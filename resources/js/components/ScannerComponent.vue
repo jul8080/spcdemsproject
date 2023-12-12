@@ -45,7 +45,7 @@
                                     <td class="text-sm font-semibold text-slate-500 capitalize">{{ log.time_in }}</td>
                                     <td class="text-sm font-semibold text-slate-500 capitalize">{{ log.time_out }}</td>
                                     <td class="text-sm font-semibold text-slate-500 capitalize">{{ log.day }}</td>
-                                    <td class="text-sm font-semibold text-slate-500 capitalize">{{ log.date }}</td>
+                                    <td class="text-sm font-semibold text-slate-500 capitalize">{{ newDate(log.created_at) }}</td>
                                 </tr>
                             </tbody>
                             <tbody v-else>
@@ -88,6 +88,7 @@
 import { QrcodeStream } from 'vue3-qrcode-reader'
 import { TailwindPagination } from 'laravel-vue-pagination';
 import { useNow, useDateFormat } from '@vueuse/core'
+import date from '../components/composables/date'
 export default {
     props: ['time'],
     components: {
@@ -102,16 +103,17 @@ export default {
             logs: { 'data': [] },
             category: 'all',
             formattedDay: useDateFormat(useNow(), "dddd", { locales: 'en-US' }),
-            formattedDate: useDateFormat(useNow(), "MM/DD/YYYY", { locales: 'en-US' }),
+            formattedDate: useDateFormat(useNow(), "YYYY-MM-DD", { locales: 'en-US' }),
         }
     },
     mounted() {
-        // console.log(this.formattedDay.toLowerCase() + ' ---Day')
-        // console.log(this.formattedDate + ' ---Date')
-        // console.log(this.time + ' ---Time')
         this.getLogs()
     },
     methods: {
+        newDate(data) {
+            const { insertDateHere } = date()
+            return insertDateHere(data)
+        },
         async getLogs(page = 1) {
             this.loading = true
             try {
@@ -141,7 +143,7 @@ export default {
                     })
                     .then(res => {
                         this.message = res.data.message
-                        console.log(this.message)
+                        console.log(res)
                     }).catch(err => {
                         console.log(err.message)
                     })

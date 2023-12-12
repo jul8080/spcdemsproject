@@ -1,10 +1,10 @@
 @extends('layouts.main')
 
 @section('content')
-    <div class="h-full w-full p-3">
+    <div class="h-full w-full p-32 py-10">
 
-        <div class="h-full flex flex-col">
-            <div class="h-[300px] flex gap-5">
+        <div class="h-full flex flex-col ">
+            <div class="h-[300px] flex gap-5 ">
                 <div class="flex-1 flex flex-col">
                     <div class="flex items-end h-[87px]">
                         <div class="flex items-center">
@@ -12,9 +12,6 @@
                                 dashboard
                             </span>
                             <h1 class="text-3xl font-bold text-gray-400">Dashboard</h1>
-                        </div>
-                        <div class="flex-1 flex items-center justify-end">
-                            <a href="#" class="bg-[#00B0F0] py-3 px-5 focus:ring-1 text-white font-bold capitalize text-sm rounded-md hover:bg-[#00B0F0]/90" id="timeIn">add time</a>
                         </div>
                     </div>
                     <div class="flex-1 flex gap-7 pt-7">
@@ -63,10 +60,10 @@
             </div>
 
             {{-- time in table  --}}
-            <div class="flex-1 flex gap-10">
+            <div class="flex-1 flex gap-10 mt-10">
                 <div class="flex-1 flex flex-col">
-                    <div class="bg-white h-20 flex items-end">
-                        <div class="flex-1 flex items-center">
+                    <div class="h-20 flex items-end shadow-2xl icon-container">
+                        <div class="flex-1 flex items-center h-full">
                             <span class="material-symbols-outlined text-[#7F7F7F] text-5xl">
                                 timer
                             </span>
@@ -103,8 +100,8 @@
 
                 {{-- time out table--}}
                 <div class="flex-1 flex flex-col">
-                    <div class="h-20 flex items-end">
-                        <div class="flex-1 flex items-center">
+                    <div class="h-20 flex items-end icon-container">
+                        <div class="flex-1 flex items-center h-full">
                             <span class="material-symbols-outlined text-[#7F7F7F] text-5xl">
                                 timer_off
                             </span>

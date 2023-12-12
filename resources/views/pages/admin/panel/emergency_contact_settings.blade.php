@@ -33,18 +33,18 @@
                     <div class="flex">
                         <div class="flex-1 flex flex-col gap-5">
                             <div class="flex gap-2 items-center">
-                                <div class="flex-1 text-end"><label for="first_name">First Name</label></div>
+                                <div class="flex-1 text-end"><label >First Name</label></div>
                                 <div class="flex-1">
                                     <input disabled type="text" name="first_name" class="w-full outline-none caret-[#00B0F0] pl-2 py-[.3rem] focus:ring-1 bg-gray-50 text-sm" value="{{ $user->emergencytContactInformation->first_name ?? "" }}" placeholder="Optional">
                                     <span class="text-xs font-semibold text-red-400 error_text first_name_error"></span>
                                 </div>
                             </div>
                             <div class="flex gap-2 items-center">
-                                <div class="flex-1 text-end"><label for="last_name">Last Name</label></div>
+                                <div class="flex-1 text-end"><label >Last Name</label></div>
                                 <div class="flex-1"><input disabled type="text" name="last_name" class="w-full outline-none caret-[#00B0F0] pl-2 py-[.3rem] focus:ring-1 bg-gray-50 text-sm" value="{{ $user->emergencytContactInformation->last_name ?? "" }}" placeholder="Optional"></div>
                             </div>
                             <div class="flex gap-2 items-center">
-                                <div class="flex-1 text-end"><label for="middle_name">Middle Name</label></div>
+                                <div class="flex-1 text-end"><label >Middle Name</label></div>
                                 <div class="flex-1"><input disabled type="text" name="middle_name" class="w-full outline-none caret-[#00B0F0] pl-2 py-[.3rem] focus:ring-1 bg-gray-50 text-sm"
                                     value="{{$user->emergencytContactInformation->middle_name ?? "" }}" placeholder="Optional"></div>
                             </div>
@@ -52,15 +52,15 @@
 
                         <div class="flex-1 flex flex-col gap-5 mr-32">
                             <div class="flex gap-2 items-center">
-                                <div class="flex-1 text-end"><label for="address">Address</label></div>
+                                <div class="flex-1 text-end"><label >Address</label></div>
                                 <div class="flex-1"><input disabled type="text" name="address" class="w-full outline-none caret-[#00B0F0] pl-2 py-[.3rem] focus:ring-1 bg-gray-50 text-sm" value="{{ $user->emergencytContactInformation->address ?? "" }}" placeholder="Optional"></div>
                             </div>
                             <div class="flex gap-2 items-center">
-                                <div class="flex-1 text-end"><label for="phone_no">Phone No</label></div>
+                                <div class="flex-1 text-end"><label >Phone No</label></div>
                                 <div class="flex-1"><input disabled type="text" name="phone_no" class="w-full outline-none caret-[#00B0F0] pl-2 py-[.3rem] focus:ring-1 bg-gray-50 text-sm" value="{{ $user->emergencytContactInformation->phone_no ?? "" }}" placeholder="Optional"></div>
                             </div>
                             <div class="flex gap-2">
-                                <div class="flex-1 text-end"><label for="relationship">Relationship</label></div>
+                                <div class="flex-1 text-end"><label >Relationship</label></div>
                                 <div class="flex-1"><input disabled type="text" name="relationship" value="{{ $user->emergencytContactInformation->relationship ?? "" }}" class="w-full outline-none caret-[#00B0F0] pl-2 py-[.3rem] focus:ring-1 bg-gray-50 text-sm" placeholder="Optional"></div>
                             </div>
                         </div>

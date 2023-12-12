@@ -16,15 +16,6 @@
     @vite(['resources/js/app.js', 'resources/css/app.css'])
 </head>
 <body class="h-screen w-screen overflow-y-hidden font-poppins">
-    <!-- {{-- loading screen --}}
-    <div class="bg-white/80 w-full h-screen absolute z-50 flex" id="loadingScreen">
-        <div class="w-[500px] h-[300px] flex flex-col items-center justify-center m-auto space-y-5">
-            <span class="material-symbols-outlined text-5xl text-sky-500  animate-spin">
-                cached
-            </span>
-            <span class="text-2xl tracking-widest text-sky-500 font-bold animate-pulse">LOADING...</span>
-        </div>
-    </div> -->
 
         <main class="h-full select-none bg-white flex" id="app">
             <div class="bg-white w-[300px] h-full flex-shrink-0 shadow">
@@ -33,20 +24,6 @@
             @yield('content')
         </main>
 
-    <script>
-
-        // var loader = document.getElementById('loadingScreen');
-        // window.addEventListener("load", function(){
-        //     loader.style.display = "none";
-        // });
-
-
-        // var startDate = new Date();
-        // var h = startDate.getHours();
-        // var e = startDate.getHours('03:33:10');
-        // var endDate = new Date().getTime();
-        // console.log(h - e);
-    </script>
     <script src="{{ asset('js/jquery-3.6.3.min.js') }}"></script>
     @yield('scripts')
 

@@ -8,13 +8,15 @@ use App\Models\User;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 
 class ScannerController extends Controller
 {
+    
     public function logs()
     {
         $dt = Carbon::now();
-        $dateNow = $dt->month . '/' . $dt->day . '/' . $dt->year;
+        $dateNow = date('Y-m-d');
         $users = Log::where('date', $dateNow)->latest()->paginate(10);
 
         // $logs = Log::where(['user_id' => '1', 'date' => '11/22/2023'])->get();
@@ -54,9 +56,16 @@ class ScannerController extends Controller
     }
     public function store(Request $request)
     {
+        //  $dt = Carbon::now();
+        //  $dateNow = date('Y-m-d');
+        // return response()->json([
+        //                  'status' => 1,
+        //                  'message' => $request->all(),
+        //                  'day' => $dateNow,
+        //              ]);
 
         $dt = Carbon::now();
-        $dateNow = $dt->month . '/' . $dt->day . '/' . $dt->year;
+        $dateNow = date('Y-m-d');
         $user = User::where('qrcode', $request->qrcode)->first();
         if ($user) {
             $logs = Log::where(['user_id' => $user->id, 'date' => $request->date, 'status' => '0'])->get();

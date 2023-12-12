@@ -7,6 +7,7 @@ use App\Models\Log;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Support\Facades\Cache;
 use App\Models\UserPersonalInformation;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Notifications\Notifiable;
 use App\Models\EmergencyContactInformation;
 use Illuminate\Database\Eloquent\Factories\HasFactory;

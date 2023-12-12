@@ -1,10 +1,29 @@
 <template>
-    <div class="bg-red-500 h-full">
-        <div class="flex flex-col p-3 bg-white gap-1 h-[750px]">
-            <div class="border h-[50px] flex items-center justify-end px-5">
-                <button @click="activeModal" class="bg-[#00B0F0] text-white px-3 py-2 rounded-sm">Add Employee</button>
+    <div class="bg-white h-full">
+        <div class="flex flex-col p-3 bg-white gap-3 h-[750px]">
+            <div class="add-container h-[100px] flex items-center justify-between px-5">
+                <div class="flex flex-col">
+                    <span class="text-gray-700 font-semibold">Manage Your Employees</span>
+                    <span class="text-gray-400 font-normal text-xs">Use the form to create employee.</span>
+                </div>
+                <button @click="activeModal" class="bg-green-400 text-white px-3 py-2 rounded-md font-semibold">
+                    <i class="fa-sharp fa-light fa-plus"></i>
+                    New Employee
+                </button>
             </div>
-            <div class="bg-white flex-1">
+            <div class="searh-container h-[70px] flex items-center justify-between px-5">
+                <div class="flex items-center justify-between gap-1">
+                    <div class="w-[300px] h-10">
+                        <input v-model="search" type="text" id="search" name="search"
+                        class="border-blue-200 outline-none focus:border-blue-500 pl-2 h-full w-full bg-[#f1f1f1]"
+                        placeholder="search employee" @input="applyFilter">
+                    </div>
+                    <div class="bg-[#00B0F0] px-3 py-2">
+                        <i class="fa-solid fa-magnifying-glass text-white"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="h-[350px] bg-white">
                 <table class="w-full whitespace-nowrap z-10 ">
                     <thead class="bg-[#00B0F0] text-justify h-14">
                         <tr>
@@ -15,7 +34,6 @@
                             <th class="text-white capitalize">Position</th>
                             <th class="text-white capitalize">Email</th>
                             <th class="text-white capitalize">QR Code</th>
-                            <th class="text-white capitalize">action</th>
                         </tr>
                     </thead>
                     <tbody class="opacity-80">
@@ -49,101 +67,190 @@
                                     :download="true" myclass="my-qr" imgclass="img-qr" downloadButton="my-button"
                                     :downloadOptions="{ name: user.last_name, extension: 'png' }" /> -->
                             </td>
-                            <td class="text-sm font-semibold text-slate-500 capitalize"></td>
-
                         </tr>
                     </tbody>
                 </table>
             </div>
-            <div class="bg-green-500">
-                <h1>123</h1>
-            </div>
+            <!-- pagination starts here... -->
+            <ButtonComponent @prev-page="getAllUsers" @next-page="getAllUsers" @last-page="getAllUsers" :page="pages" :totalPages="totalPages">
+            </ButtonComponent>
+            <!-- pagination ends here... -->
+
+            <!-- <div class="flex gap-2">
+                <button 
+                @click="getAllUsers(page - 1)" 
+                :disabled="page === 1" 
+                class="flex items-center justify-center gap-1"><i class="fa-solid fa-angle-left"></i>Prev</button>
+                <span>{{ page }} of {{ totalPages }}</span>
+                <button 
+                @click="getAllUsers(page + 1)" 
+                :disabled="page === totalPages" 
+                class="flex items-center justify-center gap-1">Next <i class="fa-solid fa-angle-right"></i></button>
+            </div> -->
+
         </div>
         <ModalComponent :modalActive="modalActive" type="primary">
             <transition name="moda-animation-inner">
-                <div v-show="modalActive" class="bg-white shadow-2xl bg-white/5 w-[1200px] flex flex-col">
+                <div ref="modal" v-show="modalActive" class="modal-container bg-white w-[1000px] rounded-md flex flex-col p-10">
                     <!-- Modal content -->
-                    <div class="bg-[#f1f1f1] h-[300px] flex items-center justify-center py-5">
-                        <div class="w-full h-full flex items-center justify-center">
-                            <img src="../../assets/images/logo-trans-1.png" alt="recordit-png"
-                                class="object-contain h-[750px] w-[750px]">
+                    <div class="h-[250px] bg-gray-200 px-[300px] rounded-tl-md rounded-tr-md">
+                        <div class=" w-full h-full">
+
+                           <img src="../../assets/images/logo-trans-1.png" alt="recordit-png" class="object-fit h-full w-full"> 
                         </div>
                     </div>
-                    <div class="bg-white flex-1 flex flex-col px-5 pt-10">
-                        <RegistrationComponent :date="date" @close="closeModal"></RegistrationComponent>
-                    </div>
 
+                    <div class="bg-white flex-1 flex flex-col px-5 pt-10">
+                        <RegistrationComponent @get-api="getAllUsers" :date="date" @close="closeModal"></RegistrationComponent>
+                    </div>
                 </div>
             </transition>
         </ModalComponent>
     </div>
 </template>
-
-<script>
-import { ref, onMounted, onUnmounted } from 'vue'
-import { TailwindPagination } from 'laravel-vue-pagination';
+<!-- <script>
 import QRCodeVue3 from "qrcode-vue3";
-import ModalComponent from '../modal/ModalComponent.vue';
+import ModalComponent from '../../components/modal/ModalComponent.vue';
 import RegistrationComponent from '../form/RegistrationComponent.vue';
+import ButtonComponent from '../helpers/ButtonComponent.vue';
 export default {
+    props: ['date'],
     components: {
-        TailwindPagination,
         QRCodeVue3,
         ModalComponent,
-        RegistrationComponent
+        RegistrationComponent,
+        ButtonComponent
     },
-    props: ['date'],
-    setup(props, { emit }) {
-        const message = ref('Hello')
-        const loading = ref(false)
-        const users = ref({ 'data': [] })
-        const modalActive = ref(false)
-
-        const getAllUsers = async () => {
-            loading.value = true
+    data() {
+        return {
+            loading: false,
+            users: [],
+            modalActive: false,
+            page: 1,
+            totalPages: 1,
+            search: '',
+            modal: null
+        }
+    },
+    methods: {
+        async getAllUsers(page) {
+            this.loading = true
             try {
-                const res = await axios.get('/admin/user-lists')
-                if (!res.data.status) {
-                    throw Error('Something went wrong!')
-                } else {
-                    users.value = await res.data.users
-                    console.log(users.value)
-                }
+                const res = await axios.get(`/admin/user-lists?page=${page}&search=${this.search}`)
+                this.users = res.data.users.data
+                this.page = res.data.users.current_page
+                this.totalPages = res.data.users.last_page
             } catch (err) {
                 console.log(err.message)
+            } finally {
+                this.loading = false
+                console.log('Done fetching...')
+            }
+        },
+        activeModal() {
+            this.modalActive = !this.modalActive
+        },
+        closeModal() {
+            this.modalActive = !this.modalActive
+        },
+        handleClose(event) {
+            if (event.key == 'Escape') {
+                this.modalActive = false
+            }
+        },
+        applyFilter() {
+            this.getAllUsers(1);
+        },
+
+    },
+    mounted() {
+        this.getAllUsers(this.page)
+        document.addEventListener('keyup', this.handleClose)
+    },
+    unmounted() {
+        document.removeEventListener('keyup', this.handleClose)
+    },
+    computed: {}
+
+}
+</script> -->
+<script>
+import { ref, onMounted, onUnmounted } from 'vue';
+import QRCodeVue3 from "qrcode-vue3";
+import { onClickOutside } from '@vueuse/core'
+import ModalComponent from '../../components/modal/ModalComponent.vue';
+import RegistrationComponent from '../form/RegistrationComponent.vue';
+import ButtonComponent from '../helpers/ButtonComponent.vue';
+export default {
+    components: {
+        QRCodeVue3,
+        ModalComponent,
+        RegistrationComponent,
+        ButtonComponent
+    },
+    props: ['date'],
+    setup() {
+
+        const loading = ref(false)
+        const users = ref([])
+        const modalActive = ref(false)
+        const pages = ref(1)
+        const totalPages = ref(1)
+        const modal = ref(null)
+        const search = ref('')
+
+        onClickOutside(modal, () => (modalActive.value = false))
+        const getAllUsers = async (page) => {
+            loading.value = true
+            try {
+                const res = await axios.get(`/admin/user-lists?page=${page}&search=${search.value}`)
+                users.value = res.data.users.data
+                pages.value = res.data.users.current_page
+                totalPages.value = res.data.users.last_page
+            } catch (err) {
+                console.log(err)
             } finally {
                 loading.value = false
                 console.log('Done fetching...')
             }
         }
-        const activeModal = () => {
-            modalActive.value = !modalActive.value
-        }
-        const closeModal = () => {
-            modalActive.value = !modalActive.value
-        }
 
+        const activeModal =() => {
+            modalActive.value = !modalActive.value
+        }
+        const closeModal =() => {
+            modalActive.value = !modalActive.value
+        }
+        const applyFilter =() => {
+            getAllUsers(1);
+        }
         const handleClose = (event) => {
-            console.log('closing modal')
             if (event.key == 'Escape') {
                 modalActive.value = false
             }
         }
+
         onMounted(() => {
             document.addEventListener('keyup', handleClose)
-            getAllUsers()
-
+            getAllUsers(pages.value)
         })
         onUnmounted(() => {
             document.removeEventListener('keyup', handleClose)
         })
+    
 
         return {
+            loading,
             users,
-            message,
             modalActive,
+            pages,
+            totalPages,
+            modal,
+            search,
+            applyFilter,
             activeModal,
             closeModal,
+            getAllUsers,
         }
     }
 }
@@ -199,5 +306,13 @@ export default {
     border-top-color: #07d;
     border-bottom-color: #07d;
     animation: spinner .8s ease infinite;
+}
+
+.add-container,
+.searh-container {
+    box-shadow: 0 0 5px rgba(0, 0, 0, .3);
+}
+.modal-container {
+    box-shadow: 0 0 20px rgba(0, 0, 0, .3);
 }
 </style>

@@ -13,6 +13,26 @@ use App\Models\EmergencyContactInformation;
 
 class AdminProfileController extends Controller
 {
+    public function getImage() 
+    {
+        $image = User::findOrFail(Auth::id());
+        return response()->json([
+            'status' => 200,
+            'user' => $image
+        ]);
+    }
+    public function userInfo(Request $request)
+    {
+        $user = User::findOrFail(Auth::id());
+        $personalInfo = PersonalInformation::where('user_id', Auth::id())->first();
+        $contactInfo = EmergencyContactInformation::where('user_id', Auth::id())->first();
+        return response()->json([
+            'status' => 200,
+            'user' => $user,
+            'personalinfo' => $personalInfo,
+            'contactinfo' => $contactInfo
+        ]);
+    }
     public function adminProfile()
     {
         $user = User::findOrFail(Auth::id());
@@ -56,6 +76,39 @@ class AdminProfileController extends Controller
             return response()->json([
                 'message'        => $validation->errors()->all(),
                 'uploaded_image' => '',
+            ]);
+        }
+    }
+    public function uploadImage(Request $request)
+    {
+        $validation = Validator::make($request->all(), [
+            'image' => '
+                required|image|mimes:jpeg,png,jpg,gif|max:2048'
+        ]);
+
+        $old_image = User::findOrFail(Auth::id());
+        if ($validation->passes()) {
+            if ($old_image->image != '') {
+                $image = $request->file('image');
+                $user_image = rand() . '.' . $image->getClientOriginalExtension();
+                $image->move(public_path('images'), $user_image);
+                unlink('images/' . $old_image->image);
+            } else {
+                $image = $request->file('image');
+                $user_image = rand() . '.' . $image->getClientOriginalExtension();
+                $image->move(public_path('images'), $user_image);
+            }
+            DB::table('users')->where('id', Auth::user()->id)->update([
+                'image' => $user_image
+            ]);
+            return response()->json([
+                'status' => 200,
+                'message' => 'Image Upladed Successfully',
+            ]);
+        } else {
+            return response()->json([
+                'status' => 404,
+                'message' => $validation->errors()->all(),
             ]);
         }
     }

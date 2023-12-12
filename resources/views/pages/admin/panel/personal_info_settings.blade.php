@@ -32,17 +32,17 @@
                     <div class="flex">
                         <div class="flex-1 flex flex-col gap-5">
                             <div class="flex gap-2 items-center">
-                                <div class="flex-1 text-end"><label for="address">Address</label></div>
-                                <div class="flex-1"><input disabled type="text" name="address" class="w-full outline-none caret-[#00B0F0] pl-2 py-[.3rem] focus:ring-1 bg-gray-50 text-sm" value="{{ $user->personalInformation->address ?? "" }}"  placeholder="Optional"></div>
+                                <div class="flex-1 text-end"><label >Address</label></div>
+                                <div class="flex-1"><input disabled type="text" name="address" class="w-full outline-none caret-[#00B0F0] pl-2 py-[.3rem] focus:ring-1 bg-gray-50 text-sm" value="{{ $user->personalInformation->address ?? '' }}"  placeholder="Optional"></div>
                             </div>
                             <div class="flex gap-2 items-center">
-                                <div class="flex-1 text-end"><label for="phone_no">Phone No</label></div>
-                                <div class="flex-1"><input disabled type="text" name="phone_no" class="w-full outline-none caret-[#00B0F0] pl-2 py-[.3rem] focus:ring-1 bg-gray-50 text-sm" value="{{ $user->personalInformation->phone_no ?? "" }}"  placeholder="Optional"></div>
+                                <div class="flex-1 text-end"><label >Phone No</label></div>
+                                <div class="flex-1"><input disabled type="text" name="phone_no" class="w-full outline-none caret-[#00B0F0] pl-2 py-[.3rem] focus:ring-1 bg-gray-50 text-sm" value="{{ $user->personalInformation->phone_no ?? '' }}"  placeholder="Optional"></div>
                             </div>
 
                             <div class="flex gap-2">
-                                <div class="flex-1 text-end"><label for="status">Status</label></div>
-                                <div class="flex-1"><input disabled type="text" name="status" class="w-full outline-none caret-[#00B0F0] pl-2 py-[.3rem] focus:ring-1 bg-gray-50 text-sm" value="{{ $user->personalInformation->status ?? "" }}" placeholder="Optional"></div>
+                                <div class="flex-1 text-end"><label >Status</label></div>
+                                <div class="flex-1"><input disabled type="text" name="status" class="w-full outline-none caret-[#00B0F0] pl-2 py-[.3rem] focus:ring-1 bg-gray-50 text-sm" value="{{ $user->personalInformation->status ?? '' }}" placeholder="Optional"></div>
                             </div>
                         </div>
 
@@ -52,11 +52,11 @@
                                 <div class="flex-1"><input disabled type="date" name="dob" class="w-full outline-none caret-[#00B0F0] pl-2 py-[.3rem] focus:ring-1 bg-gray-50 text-sm" value="{{ $user->personalInformation->dob ?? "" }}"></div>
                             </div>
                             <div class="flex gap-2 items-center">
-                                <div class="flex-1 text-end"><label for="birth_place">Birth Place</label></div>
+                                <div class="flex-1 text-end"><label >Birth Place</label></div>
                                 <div class="flex-1"><input disabled  type="text" name="birth_place" class="w-full outline-none caret-[#00B0F0] pl-2 py-[.3rem] focus:ring-1 bg-gray-50 text-sm" value="{{ $user->personalInformation->birth_place ?? "" }}" placeholder="Optional"></div>
                             </div>
                             <div class="flex gap-2">
-                                <div class="flex-1 text-end"><label for="age">Age</label></div>
+                                <div class="flex-1 text-end"><label >Age</label></div>
                                 <div class="flex-1"><input  disabled type="text" name="age" class="w-full outline-none caret-[#00B0F0] pl-2 py-[.3rem] focus:ring-1 bg-gray-50 text-sm" value="{{ $user->personalInformation->age ?? ""}}" placeholder="Optional"></div>
                             </div>
 
