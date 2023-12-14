@@ -2,7 +2,8 @@
     <transition name="modal-animation" >
         <div v-show="modalActive" :class="{
             'bg-white bg-opacity-0 fixed inset-y-0 inset-x-0 m-auto flex items-center justify-center' : type == 'secondary',
-            'bg-[#000000] bg-opacity-10 fixed inset-y-0 inset-x-0 m-auto flex items-center justify-center' : type == 'primary'
+            'bg-[#000000] bg-opacity-10 fixed inset-y-0 inset-x-0 m-auto flex items-center justify-center' : type == 'primary',
+            'backdrop-blur-sm bg-white/30 fixed inset-y-0 inset-x-0 m-auto flex items-center justify-center' : type == 'bblur'
         }">
             <slot />
 

@@ -4,8 +4,9 @@
 
             <div class="bg-white h-full w-[350px] flex flex-col gap-10 p-5">
                 <div class="image-container bg-white h-full w-full flex flex-col rounded-sm p-3">
-                    <div class="bg-gray-300 flex-1 rounded-sm">
-                        <img :src="`/images/${user.image}`" class="h-full w-full object-cover rounded-md">
+                    <div class="bg-slate-700 flex-1 rounded-md flex items-center justify-center overflow-hidden">
+                        <img v-if="user.image !== null" :src="`/images/${user.image}`" class="h-full w-full object-cover">
+                        <span v-else class="uppercase text-white font-semibold text-9xl">{{ user.first_name[0] }}{{ user.last_name[0] }}</span>
                     </div>
                     <div class="h-[60px] flex items-center justify-center bg-white">
                         <button @click="openModal"

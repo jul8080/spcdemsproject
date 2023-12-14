@@ -4,14 +4,13 @@
 
             <div class="bg-white h-full w-[350px] flex flex-col gap-10 p-5">
                 <div class="image-container bg-white h-full w-full flex flex-col rounded-sm p-3">
-                    <div class="bg-gray-300 flex-1 rounded-sm">
-                        <img :src="`/images/${user.image}`" class="h-full w-full object-cover rounded-md">
+                    <div class="bg-gray-300 flex-1 rounded-sm relative">
+                        <img loading="lazy" :src="`/images/${user.image}`" class="h-full w-full object-cover rounded-md">
                     </div>
                     <div class="h-[60px] flex items-center justify-center bg-white">
-                        <button @click="openModal"
-                            id="chooseBtn"
-                            :disabled="modalActive"
-                            class="disabled:bg-gray-300 w-[300px] h-[50px] bg-blue-500 rounded-md text-white font-semibold">Change Profile
+                        <button @click="openModal" id="chooseBtn" :disabled="modalActive"
+                            class="disabled:bg-gray-300 w-[300px] h-[50px] bg-blue-500 rounded-md text-white font-semibold">Change
+                            Profile
                         </button>
                     </div>
                 </div>
@@ -110,7 +109,13 @@
         </div>
         <!-- modal for form photo changing starts here... -->
         <modal-component :modalActive="modalActive" type="primary">
-            <div ref="modal" class="photo-form-container bg-white w-[500px] h-[250px] rounded-md flex flex-col p-5">
+            <div ref="modal" class="photo-form-container bg-white w-[500px] h-[250px] rounded-md flex flex-col p-5 relative">
+                <button @click="closeModal" v-show="success" class="wrapper absolute right-0 top-0">
+                    <div class="icon close">
+                        <span><i class="fa-solid fa-xmark"></i></span>
+                        <div class="tooltip">close</div>
+                    </div>
+                </button>
                 <div class="flex-1 flex flex-col items-center justify-center gap-5">
                     <div class="flex flex-col items-center justify-center gap-[.2rem]">
                         <div v-show="imageUrl" class="bg-red-500 h-[50px] w-[50px] rounded-md">
@@ -132,9 +137,9 @@
                         <span class="text-xs text-gray-400">Please make sure your photo clearly shows your face.</span>
                     </div>
                 </div>
-                <div class="h-10 flex items-center justify-center gap-5 border-t-[1px]">
+                <div class="h-10 flex items-center justify-center gap-5 border-t-[1px]" :class="{ 'hidden': success }">
                     <button @click="closeModal" class="text-sm text-gray-700">cancel</button>
-                    <button class="text-sm text-gray-700" @click="handleSubmit">save</button>
+                    <button class="text-sm text-gray-700" @click="handleSubmit">upload</button>
                 </div>
             </div>
         </modal-component>
@@ -161,8 +166,8 @@ export default {
         const modalActive = ref(false)
         const status = ref(0)
         const { imageFile, imageUrl, handleImageForm } = useImageUploader()
-        onClickOutside(modal, () => (modalActive.value = false))
-        
+        onClickOutside(modal, () => (modalActive.value = false, setTimeout(() => success.value = '', 300)))
+
         const getData = async () => {
             try {
                 const res = await axios.get('/admin/data')
@@ -181,7 +186,7 @@ export default {
             data.append('image', imageFile.value)
             try {
                 const res = await axios.post('/admin/upload-image', data);
-                if(res.data.status === 200) {
+                if (res.data.status === 200) {
                     status.value = res.data.status
                     success.value = res.data.message
                 } else {
@@ -190,14 +195,14 @@ export default {
                 }
                 console.log(res.data.message)
                 setTimeout(() => {
-                     success.value = ''
-                     fail.value = ''
+                    //  success.value = ''
+                    fail.value = ''
                 }, 5000)
             } catch (err) {
                 console.log(err.massage,)
             }
             getData()
-            
+
         }
         const submitHandler = (event) => {
             if (event.key == 'Escape') {
@@ -213,13 +218,14 @@ export default {
             setTimeout(() => {
                 imageUrl.value = ''
                 imageFile.value = ''
-            },500)
+
+            }, 500)
         }
         const openModal = () => {
             modalActive.value = true
         }
 
-        
+
         onMounted(() => {
             document.addEventListener('keyup', submitHandler)
             getData()
@@ -242,13 +248,41 @@ export default {
             modal,
             status,
             success,
-            fail
+            fail,
         }
     }
 }
 </script>
 
 <style scoped>
+.wrapper .icon {
+    display: flex;
+    /* cursor: pointer; */
+    align-items:  center;
+    flex-direction: column;
+    justify-content: center;
+    z-index: 2;
+    padding: 0px 5px 0px 5px;
+    color: #333;
+}
+.wrapper .icon:hover {
+    color: #fff;
+    background-color: red;
+}
+.wrapper .icon .tooltip {
+    position: absolute;
+    bottom: -20px;
+    right: 0;
+    font-size: xx-small;
+    color: #000;
+    opacity: 0;
+    pointer-events: none;
+    transition: all .3s ease;
+}
+.wrapper .icon:hover .tooltip {
+    opacity: 1;
+    pointer-events: auto;
+}
 .personal-info-container,
 .emergency-contact-container,
 

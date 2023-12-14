@@ -24,7 +24,13 @@
             {{-- change password form --}}
             <div class="flex-1 flex items-center justify-center border-t-[1px] z-10">
                 <div class="w-[600px] flex flex-col">
-
+                    <div class="self-center mt-10">
+                        @if (Session::get('success'))
+                            <span class="font-semibold text-green-300" id="message">{{ Session::get('success') }}</span>
+                        @else
+                            <span class="font-semibold text-red-400" id="message">{{ Session::get('fail') }}</span>
+                        @endif
+                    </div>
                     <form action="{{ route('user.password.change') }}" method="POST" class="flex items-center justify-center flex-col flex-1 gap-5 p-10">
                         @csrf
                         <div class="flex flex-col gap-2 w-[400px]">
@@ -71,75 +77,7 @@
                     </form>
                 </div>
             </div>
-             {{-- successfull message --}}
-                @if (Session::get('success'))
-                    <div class="bg-white w-[400px] h-[100px] absolute bottom-2 -right-96 flex flex-col px-3 py-2 border-l-8 rounded-md border-lime-500 justify-center shadow" id="showSuccess">
-                        <div class="flex-shrink-0 px-2 flex items-center justify-between">
-                            <div class="flex items-center gap-3">
-                                <div class="bg-lime-400 w-10 h-10 rounded-full flex place-items-center justify-center flex-shrink-0">
-                                    <span class="material-symbols-outlined text-white font-bold">
-                                        done
-                                    </span>
-                                </div>
-                                <span class="font-bold text-slate-700">Successfull</span>
-                            </div>
-                            <span class="material-symbols-outlined text-lime-300 font-bold" id="close">
-                                close
-                            </span>
-                        </div>
-                        <div class="flex-shrink-0 flex px-2 gap-3 items-start">
-                            <div class="w-10 h-10 rounded-full opacity-0"></div>
-                            <span class="text-sm font-semibold text-slate-500">{{ Session::get('success') }}</span>
-                        </div>
-                    </div>
-                @endif
 
-                 {{-- fail message --}}
-                 @if (Session::get('fail'))
-                 <div class="bg-white w-[400px] h-[100px] absolute bottom-2 -right-96 flex flex-col px-3 py-2 border-l-8 rounded-md border-red-500 justify-center shadow" id="showSuccess">
-                     <div class="flex-shrink-0 px-2 flex items-center justify-between">
-                         <div class="flex items-center gap-3">
-                             <div class="bg-red-400 w-10 h-10 rounded-full flex place-items-center justify-center flex-shrink-0">
-                                 <span class="material-symbols-outlined text-white font-bold">
-                                     priority_high
-                                 </span>
-                             </div>
-                             <span class="font-bold text-slate-700">Error</span>
-                         </div>
-                         <span class="material-symbols-outlined text-red-300 font-bold" id="close">
-                             close
-                         </span>
-                     </div>
-                     <div class="flex-shrink-0 flex px-2 gap-3 items-start">
-                         <div class="w-10 h-10 rounded-full opacity-0"></div>
-                         <span class="text-sm font-semibold text-slate-500">{{ Session::get('fail') }}</span>
-                     </div>
-                 </div>
-             @endif
         </div>
     </div>
-@endsection
-@section('scripts')
-    <script>
-        $('#showSuccess').animate({
-            'right':'0.5rem',
-        },300);
-
-        setTimeout(() => {
-            $('#showSuccess').animate({
-                'right':'-30rem',
-            },300);
-        }, 10000);
-
-        $('#close').click(function (e) {
-            $('#showSuccess').animate({
-                'right':'-30rem',
-            },300);
-
-        });
-    </script>
-
-    <script>
-
-    </script>
 @endsection

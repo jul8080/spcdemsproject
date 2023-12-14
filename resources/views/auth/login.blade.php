@@ -58,7 +58,7 @@
 
         {{-- ************************employee login form desktop & laptop version*************************** --}}
 
-    <div class="bg-white m-auto w-[900px] h-[500px] rounded-md flex shadow">
+    <div class="m-auto w-[900px] h-[500px] rounded-md flex login-container-shadow">
         <div class="bg-gray-50 flex-1 flex items-center justify-center flex-col p-10">
             <div class=" w-full h-full">
                 <img src="{{ asset('images/logo-trans-1.png') }}" class="h-full w-full object-cover">

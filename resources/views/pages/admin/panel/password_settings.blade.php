@@ -28,7 +28,7 @@
                         @if (Session::get('success'))
                             <span class="font-semibold text-green-300" id="message">{{ Session::get('success') }}</span>
                         @else
-                            <span class="font-semibold text-gray-300" id="message">{{ Session::get('fail') }}</span>
+                            <span class="font-semibold text-red-300" id="message">{{ Session::get('fail') }}</span>
                         @endif
                     </div>
                     <form action="{{ route('admin.password.change') }}" method="POST" class="flex items-center justify-center flex-col flex-1 gap-5 p-10">
@@ -79,28 +79,4 @@
             </div>
         </div>
     </div>
-@endsection
-@section('scripts')
-    <script>
-        $('#showSuccess').animate({
-            'right':'0.5rem',
-        },300);
-
-        setTimeout(() => {
-            $('#showSuccess').animate({
-                'right':'-30rem',
-            },300);
-        }, 10000);
-
-        $('#close').click(function (e) {
-            $('#showSuccess').animate({
-                'right':'-30rem',
-            },300);
-
-        });
-    </script>
-
-    <script>
-
-    </script>
 @endsection

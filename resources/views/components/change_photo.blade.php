@@ -1,4 +1,4 @@
-<form id="upload_form" method="POST" enctype="multipart/form-data" class="absolute left-0 right-0 bottom-0 top-0 m-auto bg-white w-[500px] h-[500px] rounded-md flex flex-col">
+<!-- <form id="upload_form" method="POST" enctype="multipart/form-data" class="absolute left-0 right-0 bottom-0 top-0 m-auto bg-white w-[500px] h-[500px] rounded-md flex flex-col">
     @csrf
     <div class="p-2 flex border-b-[1px] items-center justify-between px-5">
         <span class="text-gray-400 font-bold text-2xl">Update profile picture</span>
@@ -45,5 +45,5 @@
 </form>
 <script src="{{ asset('js/jquery-3.6.3.min.js') }}"></script>
 <script src="{{ asset('js/admin-change-photo.js') }}"></script>
-<script src="{{ asset('js/change_photo.js') }}"></script>
+<script src="{{ asset('js/change_photo.js') }}"></script> -->
 

@@ -5,6 +5,7 @@ const app = createApp({});
 
 import ScannerComponent from './components/ScannerComponent.vue';
 // admin page component
+import DashboardComponent from './components/admin/DashboardComponent.vue';
 import AttendanceComponent from './components/admin/AttendanceComponent.vue';
 import EmployeeComponent from './components/admin/EmployeeComponent.vue';
 import ProfComponent from './components/admin/ProfComponent.vue'
@@ -15,6 +16,7 @@ import ProfileComponent from './components/users/ProfileComponent.vue'
 import AdminimageComponent from './components/sidebarImage/AdminimageComponent.vue'
 import UserimageComponent from './components/sidebarImage/UserimageComponent.vue'
 app.component('scanner-component', ScannerComponent);
+app.component('dashboard-component', DashboardComponent);
 app.component('attendance-component', AttendanceComponent);
 app.component('employee-component', EmployeeComponent);
 app.component('logs-component', LogsComponent);

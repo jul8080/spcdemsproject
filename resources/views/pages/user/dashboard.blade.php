@@ -15,7 +15,7 @@
                         </div>
                     </div>
                     <div class="flex-1 flex gap-7 pt-7">
-                        <div class="bg-[#92D050] flex-nowrap flex-1 flex items-center justify-start pl-10 gap-2">
+                        <div class="bg-[#92D050] flex-nowrap flex-1 flex items-center justify-start pl-10 gap-2 rounded-md">
                             <div class="w-28 h-28 flex items-center justify-center border-4 border-white flex-shrink-0">
                                 <span class="material-symbols-outlined text-white text-7xl">
                                     timer
@@ -28,7 +28,7 @@
                                 <span class="text-white text-xs font-semibold">Total Time Out: {{ $attendanceOut->count() }}</span>
                             </div>
                         </div>
-                        <div class="bg-[#00B0F0] flex-nowrap flex-1 flex items-center justify-start pl-10 gap-2">
+                        <div class="bg-[#00B0F0] flex-nowrap flex-1 flex items-center justify-start pl-10 gap-2 rounded-md">
                             <div class="w-28 h-28 flex items-center justify-center border-4 border-white flex-shrink-0">
                                 <span class="material-symbols-outlined text-white text-7xl">
                                     how_to_reg
@@ -37,11 +37,10 @@
                             <div class="flex flex-col">
                                 {{-- <h2 class="text-5xl font-bold text-white">{{ $activeCount }}</h2> --}}
                                 <span class="font-semibold text-white text-3xl mb-2">Your Status</span>
-                                <span class="text-white text-xs font-semibold capitalize">Department: {{ Auth::user()->department }}</span>
                                 <span class="text-white text-xs font-semibold capitalize">Position: {{ Auth::user()->position }}</span>
                             </div>
                         </div>
-                        <div class="bg-[#FD9913] flex-nowrap flex-1 flex items-center justify-start pl-10 gap-2">
+                        <div class="bg-[#FD9913] flex-nowrap flex-1 flex items-center justify-start pl-10 gap-2 rounded-md">
                             <div class="w-28 h-28 flex items-center justify-center border-4 border-white flex-shrink-0">
                                 <span class="material-symbols-outlined text-white text-7xl">
                                     event_available
@@ -62,7 +61,7 @@
             {{-- time in table  --}}
             <div class="flex-1 flex gap-10 mt-10">
                 <div class="flex-1 flex flex-col">
-                    <div class="h-20 flex items-end shadow-2xl icon-container">
+                    <div class="h-20 flex items-end shadow-2xl rounded-md px-5 icon-container">
                         <div class="flex-1 flex items-center h-full">
                             <span class="material-symbols-outlined text-[#7F7F7F] text-5xl">
                                 timer
@@ -100,7 +99,7 @@
 
                 {{-- time out table--}}
                 <div class="flex-1 flex flex-col">
-                    <div class="h-20 flex items-end icon-container">
+                    <div class="h-20 flex items-end rounded-md px-5 icon-container">
                         <div class="flex-1 flex items-center h-full">
                             <span class="material-symbols-outlined text-[#7F7F7F] text-5xl">
                                 timer_off

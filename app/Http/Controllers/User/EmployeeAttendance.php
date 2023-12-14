@@ -17,7 +17,17 @@ class EmployeeAttendance extends Controller
 {
     public function logs(Request $request)
     {
-        $log = Log::where('user_id', Auth::id())->latest()->paginate(5);
+        $query = Log::query();
+        if ($request->has('beginDate')) {
+            $beginDate = $request->input('beginDate');
+            $query->whereDate('created_at', 'like', "%$beginDate%");
+        }
+        if ($request->has('endDate')) {
+            $endDate = $request->input('endDate');
+            $query->whereDate('created_at', 'like', "%$endDate%");
+        }
+     
+        $log = $query->where('user_id', Auth::id())->latest()->paginate(5);
         return response()->json([
             'status' => 1,
             'logs' => $log,

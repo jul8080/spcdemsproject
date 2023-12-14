@@ -1,9 +1,20 @@
 <template>
-    <div class="bg-red-500 h-full flex flex-col gap-2">
-        <div class="bg-yellow-500 h-20">
-        </div>
+    <div class="h-full flex flex-col gap-2">
 
-        <div class="bg-yellow-500 h-20">
+        <div class="filter-container bg-white h-48 rounded-md flex items-start flex-col gap-5 justify-center p-10">
+            <span class="text-2xl font-semibold">Filter Logs</span>
+            <form @submit.prevent="getLogs" class="flex gap-5">
+                <div class="flex flex-col w-full">
+                    <span class="text-sm">Begin Date</span>
+                    <input v-model="filterDate.beginDate" type="date" class="bg-indigo-500 text-white py-2 px-2 rounded-md text-xs outline-none">
+                </div>
+                <div class="flex flex-col w-[150px]">
+                    <span class="text-sm">End Date</span>
+                    <input v-model="filterDate.endDate" type="date" class="bg-indigo-400 text-white py-2 px-2 rounded-md text-xs outline-none">
+                </div>
+                <button type="submit">filter</button>
+            </form>
+            <span class="text-xs font-semibold">The data has been shown according to your given Information.</span>
         </div>
 
         <div class="bg-orange-500">
@@ -36,7 +47,7 @@
             </div>
         </div>
 
-        <div class="bg-pink-500 h-20">
+        <div class=" h-20">
             <!-- pagination starts here... -->
             <ButtonComponent @prev-page="getLogs" @next-page="getLogs" @last-page="getLogs" :page="pages"
                 :totalPages="totalPages">
@@ -47,7 +58,7 @@
 </template>
 
 <script>
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, computed } from 'vue'
 import ButtonComponent from '../helpers/ButtonComponent.vue'
 import newDate from '../composables/date'
 import convertToMilitaryTime from '../composables/time/military'
@@ -58,22 +69,26 @@ export default {
     },
     setup() {
         const { insertDateHere } = newDate()
+        const filterDate = ref({beginDate: '', endDate: ''})
         const logs = ref([])
         const pages = ref(1)
         const totalPages = ref(1)
-        const { insertToConverter, militaryTime } = convertToMilitaryTime()
 
         const getLogs = async (page) => {
             try {
-                const res = await axios.get(`/user/logs-api?page=${page}`);
+                const res = await axios.get(`/user/logs-api?page=${page}&beginDate=${filterDate.value.beginDate}&endDate=${filterDate.value.endDate}`);
                 logs.value = res.data.logs.data
                 pages.value = res.data.logs.current_page
                 totalPages.value = res.data.logs.last_page
+                console.log(res.data.logs.data)
             } catch (err) {
                 console.log(err.message)
             } finally {
                 console.log('Done fetching...')
             }
+        }
+        const applyFilter = () => {
+            getLogs(1);
         }
         const totalHours = (timeIn, timeOut) => {
             if (timeOut != null) {
@@ -141,13 +156,26 @@ export default {
             getLogs()
         })
         return {
+            filterDate,
             logs,
             pages,
             totalPages,
             getLogs,
             insertDateHere,
             totalHours,
+            applyFilter,
         }
     }
 }
 </script>
+<style scoped>
+::-webkit-calendar-picker-indicator {
+    background-color: white;
+    padding: 5px;
+    cursor: pointer;
+    border-radius: 3px;
+}
+.filter-container {
+    box-shadow: 0 0 5px rgba(0, 0, 0, .3);
+}
+</style>

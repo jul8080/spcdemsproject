@@ -85,18 +85,3 @@
 
     </script>
 @endsection
-
-{{-- toggle sidebar --}}
-{{-- $('#menu').click(function () {
-    $('#showSidebar').css({
-        'display':'block'
-    })
-    // $('#menu').hide();
-});
-$('#close').click(function() {
-    $('#showSidebar').css({
-        'display':'none'
-    })
-    // $('#menu').show();
- }); --}}
-

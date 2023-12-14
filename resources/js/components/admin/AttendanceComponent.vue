@@ -1,13 +1,13 @@
 <template>
     <div class="bg-white h-full">
         <div class="flex flex-col p-3 bg-white gap-3 h-[750px]">
-            <div class="csv-container h-[100px] flex items-center justify-between px-5">
+            <div class="csv-container h-[100px] flex items-center justify-between px-5 rounded-md">
                 <div class="flex flex-col">
                     <span class="text-gray-700 font-semibold">Manage Employee Logs</span>
                     <span class="text-gray-400 font-normal text-xs">Export employee logs as csv.</span>
                 </div>
                 <form @submit.prevent="exportCSV">
-                    <button class="bg-green-400 text-white font-semibold px-5 py-2 rounded-md capitalize" type="submit">
+                    <button class="bg-green-400 text-white font-semibold px-3 py-2 text-sm rounded-md capitalize" type="submit">
                         <i class="fa-solid fa-file-csv"></i>
                         export
                     </button>
@@ -15,17 +15,20 @@
             </div>
 
             <!-- filter container starts here... -->
-            <div class="filter-container h-[70px] flex items-center justify-between px-5">
-                <div class="flex gap-2">
-                    <!-- <select @change="applyFilter" v-model="filter.day" name="filter" id="filter"
-                        class="bg-green-200 text-gray-500 px-5 py-1">
-                        <option class="bg-white" v-for="(data, index) in columns" :key="index" :value="data.day">{{ data.day
-                        }}
-                        </option>
-                    </select> -->
-                    <input class="bg-[#00B0F0] text-white px-3 py-2 rounded-md font-semibold outline-none"
-                        @input="applyFilter" type="date" name="date" id="date" v-model="filter.date">
+            <div class="filter-container h-[150px] flex items-start justify-center gap-5  flex-col p-10 py-20 rounded-md">
+                <span class="text-2xl font-semibold">Filter Logs</span>
+                <div class="flex items-start w-full gap-5">
+                    <div class="flex flex-col w-[150px]">
+                        <span class="text-sm">Begin Date</span>
+                        <input class="bg-indigo-400 text-white py-2 px-2 rounded-md text-xs outline-none"
+                            @input="applyFilter" type="date" name="date" id="date" v-model="filter.date">
+                    </div>
+                    <div class="flex flex-col w-[150px]">
+                        <span class="text-sm">End Date</span>
+                        <input type="date" value="" class="bg-indigo-400 text-white py-2 px-2 rounded-md text-xs outline-none">
+                    </div>
                 </div>
+                <span class="text-xs font-semibold">The data has been shown according to your given Information.</span>
             </div>
             <!-- filter container ends here... -->
 
@@ -73,7 +76,7 @@
     </div>
 </template>
 <script>
-import { ref, onMounted, onUnmounted, computed } from 'vue'
+import { ref, onMounted } from 'vue'
 import ButtonComponent from '../helpers/ButtonComponent.vue'
 import date from '../composables/date'
 import apiCall from '../composables/api/apiCall'
@@ -91,10 +94,6 @@ export default {
                 { day: 'Friday' },
                 { day: 'Saturday' }])
                 const error = ref(null)
-        // const loading = ref(false)
-        // const logs = ref([])
-        // const pages = ref(1)
-        // const totalPages = ref(1)
         const filter = ref({day: '', date: ''})
 
         const { getApiLogs, loading, pages, totalPages, logs } = composableApi(filter.value)
@@ -103,20 +102,6 @@ export default {
             const { insertDateHere } = date()
             return insertDateHere(data)
         }
-        // const getApiLogs = async (page) => {
-        //     loading.value = true
-        //     try {
-        //         const res = await axios.get(`/admin/api-logs?page=${page}&filter=${filter.value.day}&date=${filter.value.date}`)
-        //         logs.value = res.data.attendance.data
-        //         pages.value = res.data.attendance.current_page
-        //         totalPages.value = res.data.attendance.last_page
-        //     } catch (error) {
-        //         console.log(error)
-        //     } finally {
-        //         loading.value = false
-        //         console.log('Done fetching!')
-        //     }
-        // }
         const applyFilter = () => {
             getApiLogs(1);
         }
@@ -148,220 +133,15 @@ export default {
     }
 }
 </script>
-<!-- <script>
-import ButtonComponent from '../helpers/ButtonComponent.vue'
-import date from '../composables/date'
-import apiCall from '../composables/api/apiCall'
-export default {
-    components: {
-        ButtonComponent,
-        date
-    },
-    data() {
-        return {
-            columns: [
-                { day: 'Monday' },
-                { day: 'Tuesday' },
-                { day: 'Thursday' },
-                { day: 'Friday' },
-                { day: 'Saturday' }],
-            loading: false,
-            error: null,
-            filterLogs: [],
-            logs: [],
-            page: 1,
-            totalPages: 1,
-            filter: { day: '', date: '' },
-        }
-    },
-    watch: {},
-    created() {
-        this.getApiLogs(this.page)
-    },
-    methods: {
-
-        newDate(data) {
-            const { insertDateHere } = date()
-            return insertDateHere(data)
-        },
-        convertToCSV(data) {
-            const headers = Object.keys(data[0])
-            const rows = data.map(obj => headers.map(header => obj[header]))
-            const headerRow = headers.join(',')
-            const csvRows = [headerRow, ...rows.map(row => row.join(','))]
-            return csvRows.join('\n')
-        },
-        exportCSV() {
-
-            if (this.filter.day != '') {
-                const filtering = this.logs.filter(x => x.day == this.filter.day)
-                const csvContent = this.convertToCSV(filtering)
-                const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
-                const url = URL.createObjectURL(blob);
-                const link = document.createElement('a');
-                link.href = url
-                link.setAttribute('download', `${this.hashedString}-${this.is_completed}.csv`);
-                link.click();
-            }
-            if (this.filter.date != '') {
-                apiCall(this.filter.date)
-            }
-            if (this.filter.day == '' && this.filter.date == '') {
-                apiCall(this.filter.date)
-            }
-            console.log(this.filter.date)
-        },
-        async getApiLogs(page) {
-            this.loading = true
-            try {
-                const res = await axios.get(`/admin/api-logs?page=${page}&filter=${this.filter.day}&date=${this.filter.date}`)
-                this.logs = res.data.attendance.data
-                this.page = res.data.attendance.current_page
-                this.totalPages = res.data.attendance.last_page
-            } catch (error) {
-                console.log(error)
-            } finally {
-                this.loading = false
-                console.log('Done fetching!')
-            }
-        },
-        applyFilter() {
-            this.getApiLogs(1);
-        },
-    },
-    computed: {
-        computedLogs() {
-            return this.logs
-        }
-    }
-}
-</script> -->
-<!-- <script>
-import { ref, onMounted, onUnmounted, computed } from 'vue'
-import { TailwindPagination } from 'laravel-vue-pagination';
-
-export default {
-    components: {
-        TailwindPagination,
-    },
-    setup() {
-        const days = ref([
-            {day: 'Monday'},
-            {day: 'Tuesday'},
-            {day: 'Thursday'},
-            {day: 'Friday'},
-            {day: 'Saturday'},
-        ])
-        const loading = ref(false)
-        const error = ref('')
-        const logs = ref({ 'data': [] })
-        const status = ref({
-            day: null,
-            date: null
-        })
-
-        const filterLogs = computed(() => {
-            if(status.day != null) {
-                return logs.value.filter(x => x.day == status.day.value)
-            } else {
-
-                return logs.value.filter(x => x.day == 'Tuesday')
-            }
-        })
 
 
-        const getApiLogs = async (page = 1) => {
-            loading.value = true
-            try {
-                const res = await axios.get(`/admin/api-logs?page=${page}`)
-                logs.value = await res.data.attendace
-                console.log(logs.value)
-            } catch (error) {
-                console.log(error)
-            } finally {
-                loading.value = false
-                console.log('Done fetching!')
-            }
-        }
-        onMounted(() => {
-            getApiLogs()
-        })
-     
-        return { loading, error, print, logs, getApiLogs, filterLogs, status, days }
-    }
-}
-</script> -->
-
-<!-- <script type="module">
-import { usePaperizer } from 'paperizer'
-import { TailwindPagination } from 'laravel-vue-pagination';
-import ModalComponent from '../modal/ModalComponent.vue';
-export default {
-    components: {
-        TailwindPagination,
-        ModalComponent
-    },
-    data() {
-        return {
-            modalActive: false,
-            loading: false,
-            error: '',
-            singleLog: '',
-            print: 'print',
-            logs: { 'data': [] },
-            target: null
-        }
-    },
-    mounted() {
-        this.getApiLogs()
-        this.keyUp()
-    },
-    methods: {
-        handleClose(event){
-            console.log('closing modal')
-            if(event.key == 'Escape') {
-                    this.modalActive = false
-            }
-        },
-        keyUp() {
-            document.addEventListener('keyup', this.handleClose)
-        },
-        async viewLog(id) {
-            try {
-                const res = await axios.get(`/admin/view-log/${id}`)
-                this.singleLog = res.data.log
-                console.log(this.singleLog)
-            } catch (error) {
-                console.log(error)
-            } finally {
-                console.log('Done fetching!')
-            }
-            this.modalActive = !this.modalActive
-        },
-        async getApiLogs(page = 1) {
-            this.loading = true
-            try {
-                const res = await axios.get(`/admin/api-logs?page=${page}`)
-                this.logs = res.data.attendace
-                console.log(this.logs)
-            } catch (error) {
-                console.log(error)
-            } finally {
-                this.loading = false
-                console.log('Done fetching!')
-            }
-        },
-        toggleModal() {
-            this.modalActive = !this.modalActive
-        },
-        printAttendance() {
-            const { paperize } = usePaperizer(this.print)
-            paperize()
-        },
-    }
-}
-</script> -->
 <style scoped>
+::-webkit-calendar-picker-indicator {
+    background-color: white;
+    padding: 5px;
+    cursor: pointer;
+    border-radius: 3px;
+}
 .csv-container,
 .filter-container {
     box-shadow: 0 0 5px rgba(0, 0, 0, .3);

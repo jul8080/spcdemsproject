@@ -35,7 +35,7 @@ Route::prefix('admin')->middleware(['auth', 'isAdmin', 'PreventBackHistory'])->n
 
 
 
-        Route::get('/employee/{id}', 'Profile')->name('profile');
+        Route::get('/employee/{id}', 'Profile')->name('profile'); //target route
         Route::post('/search/user', 'searchUser')->name('search.employee');
         Route::put('/user/store', 'userStore')->name('user.store');
 
@@ -44,6 +44,8 @@ Route::prefix('admin')->middleware(['auth', 'isAdmin', 'PreventBackHistory'])->n
         Route::get('/view-log/{id}', 'viewLog');
         Route::get('/user-lists', 'users');
         Route::get('/user/logs-csve-xport', 'exportLogs');
+        // dashboard data
+        Route::get('/user-data/dashboard', 'userLists');
     });
 
     Route::controller(AdminProfileController::class)->group(function(){

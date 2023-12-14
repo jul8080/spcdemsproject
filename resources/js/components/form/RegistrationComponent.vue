@@ -48,9 +48,10 @@
                 <div class="h-[70px] flex flex-col">
                     <label class="capitalize text-sm">position</label>
                     <select v-model="employee.position" class="h-full bg-gray-200 pl-5 rounded-md" name="position">
-                        <option value="" selected>--</option>
-                        <option value="position 1" class="bg-white">position 1</option>
-                        <option value="position 2" class="bg-white">position 2</option>
+                        <option value="" selected>Select</option>
+                        <option value="employee" class="bg-white">Employee</option>
+                        <option value="secretary" class="bg-white">Secretary</option>
+                        <option value="checker" class="bg-white">Checker</option>
                     </select>
                 </div>
                 <!-- error message starts here... -->

@@ -7,32 +7,46 @@ use App\Models\Attendance;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
-use App\Models\PersonalInformation;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
-use App\Models\EmergencyContactInformation;
-use App\Helpers\Helper;
 use App\Models\Log;
 
 class SamsonEmployeeController extends Controller
 {
-    public function exportLogs(Request $request) {
+    public function userLists(Request $request)
+    {
+        $dateNow = Carbon::now();
+        $today = Carbon::today();
+        $authenticated = User::findOrFail(Auth::id());
+        $users = User::where('role_as', 'user')->get();
+        $maleCount = User::where(['role_as' => 'user','gender' => 'male'])->count();
+        $femaleCount = User::where(['role_as' => 'user','gender' => 'female'])->count();
+        $countNewUsers = User::whereDate('created_at', $dateNow)->where('role_as', 'user')->count();
+        $newUsers = User::where('role_as', 'user')->whereDate('created_at', $dateNow)->latest()->paginate(3);
+
+        return response()->json([
+            'status' => 200,
+            'users' => $users,
+            'maleCount' => $maleCount,
+            'femaleCount' => $femaleCount,
+            'countNewUsers' => $countNewUsers,
+            'newUsers' => $newUsers,
+            'auth' => $authenticated
+        ]);
+    }
+    public function exportLogs(Request $request)
+    {
         $query = Log::query();
         if ($request->has('date')) {
             $date = $request->input('date');
             $query->whereDate('created_at', 'like', "%$date%");
         }
-        $logs = $query->latest()->get(); 
+        $logs = $query->latest()->get();
         return response()->json([
             'status' => 200,
             'logs' => $logs
         ], 200);
-        // $logs = Log::latest()->get();
-        // return response()->json([
-        //     'status' => 200,
-        //     'logs' => $logs
-        // ], 200);
     }
     public function users(Request $request)
     {
@@ -71,7 +85,7 @@ class SamsonEmployeeController extends Controller
             $date = $request->input('date');
             $query->whereDate('created_at', 'like', "%$date%");
         }
-        $logs = $query->latest()->paginate(5); 
+        $logs = $query->latest()->paginate(5);
         return response()->json([
             'status' => 200,
             'attendance' => $logs
@@ -79,17 +93,8 @@ class SamsonEmployeeController extends Controller
     }
     public function homePage(Request $request)
     {
-
-        $dateNow = Carbon::now();
-        $today = Carbon::today();
         if (Auth::check()) {
-            $users = User::where('role_as', 'user')->get();
-            $male = User::where('gender', 'male')->count();
-            $female = User::where('gender', 'female')->count();
-            $newUserCount = User::whereDate('created_at', $dateNow)->count();
-            $usersTable = User::where('role_as', 'user')->orderBy('created_at', 'desc')->latest()->paginate(5);
-
-            return view('pages.admin.dashboard', compact('users', 'usersTable', 'dateNow', 'newUserCount', 'male', 'female', 'dateNow', 'today'));
+            return view('pages.admin.dashboard');
         }
         return redirect()->route('login');
     }

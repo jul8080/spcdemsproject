@@ -1,17 +1,17 @@
 <template>
     <div class="bg-white h-full">
         <div class="flex flex-col p-3 bg-white gap-3 h-[750px]">
-            <div class="add-container h-[100px] flex items-center justify-between px-5">
+            <div class="add-container h-[100px] flex items-center justify-between px-5 rounded-md">
                 <div class="flex flex-col">
                     <span class="text-gray-700 font-semibold">Manage Your Employees</span>
                     <span class="text-gray-400 font-normal text-xs">Use the form to create employee.</span>
                 </div>
-                <button @click="activeModal" class="bg-green-400 text-white px-3 py-2 rounded-md font-semibold">
+                <button @click="activeModal" class="bg-green-400 text-white px-2 py-3 rounded-md font-semibold text-xs">
                     <i class="fa-sharp fa-light fa-plus"></i>
                     New Employee
                 </button>
             </div>
-            <div class="searh-container h-[70px] flex items-center justify-between px-5">
+            <div class="searh-container h-[70px] flex items-center justify-between px-5 rounded-md">
                 <div class="flex items-center justify-between gap-1">
                     <div class="w-[300px] h-10">
                         <input v-model="search" type="text" id="search" name="search"
@@ -75,21 +75,8 @@
             <ButtonComponent @prev-page="getAllUsers" @next-page="getAllUsers" @last-page="getAllUsers" :page="pages" :totalPages="totalPages">
             </ButtonComponent>
             <!-- pagination ends here... -->
-
-            <!-- <div class="flex gap-2">
-                <button 
-                @click="getAllUsers(page - 1)" 
-                :disabled="page === 1" 
-                class="flex items-center justify-center gap-1"><i class="fa-solid fa-angle-left"></i>Prev</button>
-                <span>{{ page }} of {{ totalPages }}</span>
-                <button 
-                @click="getAllUsers(page + 1)" 
-                :disabled="page === totalPages" 
-                class="flex items-center justify-center gap-1">Next <i class="fa-solid fa-angle-right"></i></button>
-            </div> -->
-
         </div>
-        <ModalComponent :modalActive="modalActive" type="primary">
+        <ModalComponent :modalActive="modalActive" type="bblur">
             <transition name="moda-animation-inner">
                 <div ref="modal" v-show="modalActive" class="modal-container bg-white w-[1000px] rounded-md flex flex-col p-10">
                     <!-- Modal content -->

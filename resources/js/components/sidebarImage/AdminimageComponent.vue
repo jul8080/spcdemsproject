@@ -1,6 +1,6 @@
 <template>
-    <div class="bg-slate-700 w-12 h-12 rounded-md flex items-center justify-center shadow">
-        <img v-if="user" :src="`/images/${user.image}`" class="object-cover  w-full h-full rounded-md">
+    <div class="bg-slate-700 w-12 h-12 rounded-md flex items-center justify-center overflow-hidden shadow">
+        <img v-if="user" :src="`/images/${user.image}`" class="object-cover  w-full h-full">
         <img v-else src="" class="object-cover  w-full h-full rounded-md">
     </div>
 </template>
