@@ -33,7 +33,7 @@
                             </div>
                             <div class="flex flex-row gap-3">
                                 <span class="text-gray-400">Gender:</span>
-                                <span class="">{{ user.gender }}</span>
+                                <span class="capitalize">{{ user.gender }}</span>
                             </div>
                         </div>
                     </div>
@@ -55,11 +55,11 @@
                             </div>
                             <div class="flex flex-row gap-3">
                                 <span class="text-gray-400">Position:</span>
-                                <span class="">{{ user.position }}</span>
+                                <span class="capitalize">{{ user.position }}</span>
                             </div>
                             <div class="flex flex-row gap-3">
                                 <span class="text-gray-400">Address:</span>
-                                <span class="">{{ personalInfo ? personalInfo.address : '' }}</span>
+                                <span class="capitalize">{{ personalInfo ? personalInfo.address : '' }}</span>
                             </div>
                             <div class="flex flex-row gap-3">
                                 <span class="text-gray-400">Date of Birth:</span>

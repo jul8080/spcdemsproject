@@ -83,7 +83,7 @@
                     <div class="h-[250px] bg-gray-200 px-[300px] rounded-tl-md rounded-tr-md">
                         <div class=" w-full h-full">
 
-                           <img src="../../assets/images/logo-trans-1.png" alt="recordit-png" class="object-fit h-full w-full"> 
+                           <img src="../../assets/images/logo-2.png" alt="recordit-png" class="object-fit h-full w-full"> 
                         </div>
                     </div>
 

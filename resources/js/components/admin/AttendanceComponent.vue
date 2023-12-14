@@ -20,12 +20,12 @@
                 <div class="flex items-start w-full gap-5">
                     <div class="flex flex-col w-[150px]">
                         <span class="text-sm">Begin Date</span>
-                        <input class="bg-indigo-400 text-white py-2 px-2 rounded-md text-xs outline-none"
+                        <input class="bg-red-500 text-white py-2 px-2 rounded-md text-xs outline-none"
                             @input="applyFilter" type="date" name="date" id="date" v-model="filter.date">
                     </div>
                     <div class="flex flex-col w-[150px]">
                         <span class="text-sm">End Date</span>
-                        <input type="date" value="" class="bg-indigo-400 text-white py-2 px-2 rounded-md text-xs outline-none">
+                        <input type="date" value="" class="bg-green-500 text-white py-2 px-2 rounded-md text-xs outline-none">
                     </div>
                 </div>
                 <span class="text-xs font-semibold">The data has been shown according to your given Information.</span>

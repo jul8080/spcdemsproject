@@ -3,8 +3,8 @@
         <div class="flex gap-2 h-[750px]">
             <div class="flex gap-1 bg-slate-200">
                 <div class="bg-white gap-1 w-[900px] flex flex-col relative item-center justify-center py-5 px-5">
-                    <img src="../assets/images/spcd-logo.png" alt="samson logo"
-                        class="w-full h-full object-cover opacity-20 absolute top-0 left-0 right-0 bottom-0 m-auto">
+                    <img src="../assets/images/logo-2.png" alt="samson logo"
+                        class="w-[500px] h-[500px] object-cover opacity-20 absolute top-32 left-0 right-0 bottom-0 m-auto">
                     <div class="border p-3">
                         <div class="flex justify-between items-center">
                             <h1 class="font-bold text-gray-500">Employee logs</h1>
@@ -63,8 +63,8 @@
 
                 </div>
                 <div class="bg-white h-full w-[500px] flex items-center justify-center flex-col gap-5 py-10 relative">
-                    <img src="../assets/images/samson-school.jpg" alt="samson school"
-                        class="opacity-20 absolute h-full w-full top-0 right-0 bottom-0 left-0 m-auto object-cover">
+                    <!-- <img src="../assets/images/samson-school.jpg" alt="samson school"
+                        class="opacity-20 absolute h-full w-full top-0 right-0 bottom-0 left-0 m-auto object-cover"> -->
                     <div class="bg-[#00B0F0]/10 w-full h-full absolute top-0 right-0 bottom-0 left-0 m-auto"></div>
                     <div class="bg-white w-80 h-80 flex items-center flex-col z-10">
                         <div class="bg-green-500 w-full h-full p-3 relative">

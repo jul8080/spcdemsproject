@@ -6,11 +6,11 @@
             <form @submit.prevent="getLogs" class="flex gap-5">
                 <div class="flex flex-col w-full">
                     <span class="text-sm">Begin Date</span>
-                    <input v-model="filterDate.beginDate" type="date" class="bg-indigo-500 text-white py-2 px-2 rounded-md text-xs outline-none">
+                    <input v-model="filterDate.beginDate" type="date" class="bg-red-500 text-white py-2 px-2 rounded-md text-xs outline-none">
                 </div>
                 <div class="flex flex-col w-[150px]">
                     <span class="text-sm">End Date</span>
-                    <input v-model="filterDate.endDate" type="date" class="bg-indigo-400 text-white py-2 px-2 rounded-md text-xs outline-none">
+                    <input v-model="filterDate.endDate" type="date" class="bg-green-500 text-white py-2 px-2 rounded-md text-xs outline-none">
                 </div>
                 <button type="submit">filter</button>
             </form>
@@ -47,12 +47,15 @@
             </div>
         </div>
 
-        <div class=" h-20">
+        <div v-if="logs.length > 0" class=" h-20">
             <!-- pagination starts here... -->
             <ButtonComponent @prev-page="getLogs" @next-page="getLogs" @last-page="getLogs" :page="pages"
                 :totalPages="totalPages">
             </ButtonComponent>
             <!-- pagination ends here... -->
+        </div>
+        <div v-else class=" h-20">
+      
         </div>
     </div>
 </template>

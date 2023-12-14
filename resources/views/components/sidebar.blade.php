@@ -4,7 +4,7 @@
 
     <div class="bg-white w-full h-[200px] flex items-center justify-center border-b-[1px] border-gray-50">
         <div class="w-full h-full">
-            <img loading="lazy" src="{{ asset('images/logo-1.png') }}" class="w-full h-full object-contain">
+            <img loading="lazy" src="{{ asset('images/logo-2.png') }}" class="w-full h-full object-contain">
         </div>
     </div>
 
@@ -98,7 +98,7 @@
         <!-- user and admin image ends here -->
         <div class="flex-1 ml-2 -space-y-1">
             @if (Auth::user()->role_as == 'admin')
-                <a href="{{ url('admin/profile') }}" class="font-semibold hover:underline capitalize">{{ Auth::user()->first_name }} {{ Auth::user()->last_name }}</a>
+                <a href="{{ url('admin/profile') }}" class="font-semibold hover:underline capitalize lg:text-sm">{{ Auth::user()->first_name }} {{ Auth::user()->last_name }}</a>
                 <a href="{{ route('admin.profile.settings') }}" class="flex items-center group hover:underline w-14">
                     <span class="text-xs">{{ Auth::user()->role_as }}</span>
                     <img src="{{ asset('images/settings.png') }}" class="w-[.60rem] h-[.60rem] ml-2">
@@ -116,7 +116,7 @@
             <form action="{{ url('/logout') }}" method="POST">
                 @csrf
                 <button type="submit" class="w-full">
-                    <span class="material-symbols-outlined self-end hover:text-slate-900 text-slate-500">logout</span></a>
+                    <span class="material-symbols-outlined self-end hover:text-slate-900 text-slate-500 lg:text-base">logout</span></a>
                 </button>
             </form>
 
