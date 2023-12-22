@@ -1,12 +1,12 @@
 <template>
     <div class="bg-slate-700 w-12 lg:w-10 h-12 lg:h-10 rounded-md flex items-center justify-center overflow-hidden shadow">
-        <img v-if="user" :src="`/images/${user.image}`" class="object-cover  w-full h-full">
-        <img v-else src="" class="object-cover  w-full h-full rounded-md">
+        <img v-if="user.image !== null" :src="`/images/${user.image}`" class="object-cover  w-full h-full">
+        <span v-else class="uppercase text-white font-semibold">{{ user.first_name[0] }}{{ user.last_name[0] }}</span>
     </div>
 </template>
 
 <script>
-import { ref, onMounted,onUnmounted, onBeforeUnmount, watchEffect } from 'vue';
+import { ref, onMounted, onUnmounted ,watchEffect } from 'vue';
 export default {
     setup() {
         const user = ref({})
@@ -14,7 +14,6 @@ export default {
             try {
                 const res = await axios.get('/admin/image');
                 user.value = res.data.user
-                // console.log(user.value)
             } catch (err) {
                 console.log(err.message)
             }
@@ -24,6 +23,9 @@ export default {
             if(user.value.image) {
                 getImage()
             }
+        })
+        onUnmounted(() => {
+            stopWatchEffect();
         })
         onMounted(() => {
             getImage()
@@ -37,13 +39,3 @@ export default {
 </script>
 
 <style scoped></style>
-<!-- @if (Auth::user()->image != '')
-@else
-    <div class="bg-slate-700 w-12 h-12 rounded-md flex items-center justify-center">
-        <span class="text-white font-sans uppercase text-3xl font-bold">{{ substr(Auth::user()->first_name, 0, 1) }}</span>
-    </div>
-@endif -->
-
-<!-- <div class="bg-slate-700 w-12 h-12 rounded-md flex items-center justify-center shadow">
-    <img src="{{ asset('images/'.Auth::user()->image) }}" class="object-cover  w-full h-full rounded-md">
-</div> -->

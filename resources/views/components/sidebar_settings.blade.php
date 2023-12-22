@@ -1,41 +1,41 @@
-<div class="bg-white w-[300px] h-full overflow-y-auto flex flex-col drop-shadow-md flex-shrink-0">
+<div class="bg-white desktop:w-[300px] laptop:w-[230px] h-full overflow-y-auto flex flex-col drop-shadow-md flex-shrink-0">
 
     @if (Auth::user()->role_as == 'admin')
     <div class="flex-1">
         <nav class="h-full">
-            <h2 class="capitalize font-bold text-gray-400 pl-5 pt-10 text-3xl">settings</h2>
+            <h2 class="capitalize font-semibold text-gray-400 pl-5 pt-10 desktop:text-3xl laptop:text-lg">settings</h2>
             <ul class="mt-5">
-                <li class="h-14 flex items-center ml-5">
+                <li class="h-14 flex items-center desktop:ml-5">
                     <a href="{{ route('admin.profile.settings') }}" class="flex items-center gap-[.3rem] hover:bg-gray-50 w-full h-full pl-5 rounded-tl-md rounded-bl-md">
-                        <span class="material-symbols-outlined text-gray-400">
+                        <span class="material-symbols-outlined text-gray-400 laptop:text-lg desktop:text-xl">
                             manage_accounts
                         </span>
-                        <span class="capitalize text-gray-400 font-semibold">Profile Management</span>
+                        <span class="capitalize text-gray-400 desktop:font-semibold laptop:text-sm desktop:text-base">Profile Management</span>
                     </a>
                 </li>
-                <li class="h-14 flex items-center ml-5">
+                <li class="h-14 flex items-center desktop:ml-5">
                     <a href="{{ route('admin.personal.info.settings') }}" class="flex items-center gap-[.3rem] hover:bg-gray-50 w-full h-full pl-5 rounded-tl-md rounded-bl-md">
-                        <span class="material-symbols-outlined text-gray-400">
+                        <span class="material-symbols-outlined text-gray-400 laptop:text-lg desktop:text-xl">
                             demography
                         </span>
-                        <span class="capitalize text-gray-400 font-semibold">personal information</span>
+                        <span class="capitalize text-gray-400 desktop:font-semibold laptop:text-sm desktop:text-base">personal information</span>
                     </a>
                 </li>
-                <li class="h-14 flex items-center ml-5">
+                <li class="h-14 flex items-center desktop:ml-5">
                     <a href="{{ route('admin.emergency.contact.settings') }}" class="flex items-center gap-[.3rem] hover:bg-gray-50 w-full h-full pl-5 rounded-tl-md rounded-bl-md">
-                        <span class="material-symbols-outlined text-gray-400">
+                        <span class="material-symbols-outlined text-gray-400 laptop:text-lg desktop:text-xl">
                             contact_phone
                         </span>
-                        <span class="capitalize text-gray-400 font-semibold">Emergency contact</span>
+                        <span class="capitalize text-gray-400 desktop:font-semibold laptop:text-sm desktop:text-base">Emergency contact</span>
                     </a>
                 </li>
 
-                <li class="h-14 flex items-center ml-5">
+                <li class="h-14 flex items-center desktop:ml-5">
                     <a href="{{ route('admin.password.settings') }}" class="flex items-center gap-[.3rem] hover:bg-gray-50 w-full h-full pl-5 rounded-tl-md rounded-bl-md">
-                        <span class="material-symbols-outlined text-gray-400">
+                        <span class="material-symbols-outlined text-gray-400 laptop:text-lg desktop:text-xl">
                             lock_person
                         </span>
-                        <span class="capitalize text-gray-400 font-semibold">change password</span>
+                        <span class="capitalize text-gray-400 desktop:font-semibold laptop:text-sm desktop:text-base">change password</span>
                     </a>
                 </li>
             </ul>
@@ -56,39 +56,39 @@
     {{-- user sidebar settings  --}}
     <div class="flex-1">
             <nav class="h-full">
-                <h2 class="capitalize font-bold text-gray-400 pl-5 pt-10 text-3xl">settings</h2>
+                <h2 class="capitalize font-bold text-gray-400 pl-5 pt-10 desktop:text-3xl laptop:text-lg">settings</h2>
                 <ul class="mt-5">
-                    <li class="h-14 flex items-center ml-5">
+                    <li class="h-14 flex items-center desktop:ml-5">
                         <a href="{{ route('user.profile.settings') }}" class="flex items-center gap-[.3rem] hover:bg-gray-50 w-full h-full pl-5 rounded-tl-md rounded-bl-md">
-                            <span class="material-symbols-outlined text-gray-400">
+                            <span class="material-symbols-outlined text-gray-400 laptop:text-lg desktop:text-xl">
                                 manage_accounts
                             </span>
-                            <span class="capitalize text-gray-400 font-semibold">Profile Management</span>
+                            <span class="capitalize text-gray-400 font-semibold desktop:font-semibold laptop:text-sm desktop:text-base">Profile Management</span>
                         </a>
                     </li>
-                    <li class="h-14 flex items-center ml-5">
+                    <li class="h-14 flex items-center desktop:ml-5">
                         <a href="{{ route('user.personal.info.settings') }}" class="flex items-center gap-[.3rem] hover:bg-gray-50 w-full h-full pl-5 rounded-tl-md rounded-bl-md">
-                            <span class="material-symbols-outlined text-gray-400">
+                            <span class="material-symbols-outlined text-gray-400 laptop:text-lg desktop:text-xl">
                                 demography
                             </span>
-                            <span class="capitalize text-gray-400 font-semibold">personal information</span>
+                            <span class="capitalize text-gray-400 font-semibold desktop:font-semibold laptop:text-sm desktop:text-base">personal information</span>
                         </a>
                     </li>
-                    <li class="h-14 flex items-center ml-5">
+                    <li class="h-14 flex items-center desktop:ml-5">
                         <a href="{{ route('user.emergency.contact.settings') }}" class="flex items-center gap-[.3rem] hover:bg-gray-50 w-full h-full pl-5 rounded-tl-md rounded-bl-md">
-                            <span class="material-symbols-outlined text-gray-400">
+                            <span class="material-symbols-outlined text-gray-400 laptop:text-lg desktop:text-xl">
                                 contact_phone
                             </span>
-                            <span class="capitalize text-gray-400 font-semibold">Emergency contact</span>
+                            <span class="capitalize text-gray-400 font-semibold desktop:font-semibold laptop:text-sm desktop:text-base">Emergency contact</span>
                         </a>
                     </li>
 
-                    <li class="h-14 flex items-center ml-5">
+                    <li class="h-14 flex items-center desktop:ml-5">
                         <a href="{{ route('user.password.settings') }}" class="flex items-center gap-[.3rem] hover:bg-gray-50 w-full h-full pl-5 rounded-tl-md rounded-bl-md">
-                            <span class="material-symbols-outlined text-gray-400">
+                            <span class="material-symbols-outlined text-gray-400 laptop:text-lg desktop:text-xl">
                                 lock_person
                             </span>
-                            <span class="capitalize text-gray-400 font-semibold">change password</span>
+                            <span class="capitalize text-gray-400 font-semibold desktop:font-semibold laptop:text-sm desktop:text-base">change password</span>
                         </a>
                     </li>
                 </ul>

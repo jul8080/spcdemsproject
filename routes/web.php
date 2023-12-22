@@ -1,29 +1,38 @@
 <?php
 
-use App\Http\Controllers\Admin\AdminProfileController;
-use App\Http\Controllers\Admin\SamsonEmployeeController;
-use App\Http\Controllers\Auth\UserController;
-use App\Http\Controllers\Admin\ProfileSettingsController;
+use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ScannerController;
-use App\Http\Controllers\User\EmployeeAttendance;
+use App\Http\Controllers\Auth\UserController;
 use App\Http\Controllers\User\DetailController;
-use App\Http\Controllers\User\EmergencyContactInformation;
+use App\Http\Controllers\User\EmployeeAttendance;
 use App\Http\Controllers\User\SettingsController;
 use App\Http\Controllers\User\UserRoleController;
-use GuzzleHttp\Middleware;
-use Illuminate\Support\Facades\Route;
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
+use App\Http\Controllers\Admin\AdminProfileController;
+use App\Http\Controllers\Admin\SamsonEmployeeController;
+use App\Http\Controllers\Admin\ProfileSettingsController;
+use App\Http\Controllers\User\EmergencyContactInformation;
+use App\Models\User;
+use App\Helpers\Helper;
+use Illuminate\Support\Facades\Hash;
 
 
+// Route::get('/create', function() {
+//     $qrcode = Helper::QRCodeGenerator(new User, 'qrcode', 6, 'QR');
+//     User::create([
+//         'qrcode'      => $qrcode,
+//         'first_name'  => 'Jul',
+//         'last_name'   => 'Mukatil',
+//         'middle_name' => 'Punding',
+//         'position'    => 'Employee',
+//         'gender'      => 'Male',
+//         'email'       => 'j@gmail.com',
+//         'password'    => Hash::make('admin')
+//     ]);
+//     return 'Registered successfully!';
+// });
+Route::get('/', function () {
+    return view('auth.login');
+});
 Route::prefix('admin')->middleware(['auth', 'isAdmin', 'PreventBackHistory'])->name('admin.')->group(function(){
 
     Route::controller(SamsonEmployeeController::class)->group(function()
@@ -32,10 +41,11 @@ Route::prefix('admin')->middleware(['auth', 'isAdmin', 'PreventBackHistory'])->n
         Route::get('/employee', 'employeePage')->name('employee');
         Route::get('/attendance', 'attendancePage')->name('attendance');
         Route::get('/user/edit/{id}','userEdit')->name('user.edit');
+        Route::get('/reset/user-password','resetPassword')->name('reset_password');
+        Route::get('/user/new-password/{id}','newPassword')->name('new_password');
 
 
-
-        Route::get('/employee/{id}', 'Profile')->name('profile'); //target route
+        Route::get('/employee/{id}', 'Profile')->name('profile');
         Route::post('/search/user', 'searchUser')->name('search.employee');
         Route::put('/user/store', 'userStore')->name('user.store');
 
@@ -44,6 +54,10 @@ Route::prefix('admin')->middleware(['auth', 'isAdmin', 'PreventBackHistory'])->n
         Route::get('/view-log/{id}', 'viewLog');
         Route::get('/user-lists', 'users');
         Route::get('/user/logs-csve-xport', 'exportLogs');
+        Route::get('/user-id/{id}', 'editPosition');
+        Route::post('/user/store', 'storePosition');
+        Route::post('/confirm-email', 'confirmEmail');
+        Route::post('/update/user-password/', 'submitNewPassword');
         // dashboard data
         Route::get('/user-data/dashboard', 'userLists');
     });
@@ -119,6 +133,7 @@ Route::prefix('user')->middleware(['auth', 'isUser', 'PreventBackHistory'])->nam
         Route::get('/data', 'userInfo');
         Route::get('/image', 'getImage');
         Route::post('/upload-image', 'uploadImage');
+        Route::get('/user-data/dashboard', 'userData');
     });
 
 

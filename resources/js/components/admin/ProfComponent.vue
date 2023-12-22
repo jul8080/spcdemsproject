@@ -1,106 +1,101 @@
 <template>
-    <div class="white h-full w-full p-28">
-        <div class="h-full w-full flex flex-row">
+    <div class="bg-white h-full w-full desktop:p-28 laptop:p-10 laptop:flex laptop:items-center laptop:justify-center">
+        <div class="laptop:h-[700px] desktop:h-full w-full flex">
 
-            <div class="bg-white h-full w-[350px] flex flex-col gap-10 p-5">
-                <div class="image-container bg-white h-full w-full flex flex-col rounded-sm p-3">
-                    <div class="bg-gray-300 flex-1 rounded-sm relative">
-                        <img loading="lazy" :src="`/images/${user.image}`" class="h-full w-full object-cover rounded-md">
+            <div class="h-full desktop:w-[300px] laptop:w-[280px] flex flex-col desktop:gap-0 desktop:p-0 laptop:gap-0 laptop:p-0">
+                <div class="image-container bg-white desktop:h-[500px] laptop:h-[500px] w-full flex flex-col">
+                    <div class="bg-slate-700 flex-1 flex items-center justify-center relative overflow-hidden">
+                        <div class="h-full w-full overflow-hidden flex items-center justify-center">
+                            <img  v-if="user.image !== null" loading="lazy" :src="`/images/${user.image}`" class="h-full w-full object-cover">
+                            <span v-else class="uppercase text-white font-semibold desktop:text-9xl laptop:text-7xl">{{ user.first_name[0] }}{{ user.last_name[0] }}</span>
+                        </div>
                     </div>
-                    <div class="h-[60px] flex items-center justify-center bg-white">
+                    <div class="h-[50px] flex items-center justify-center w-full">
                         <button @click="openModal" id="chooseBtn" :disabled="modalActive"
-                            class="disabled:bg-gray-300 w-[300px] h-[50px] bg-blue-500 rounded-md text-white font-semibold">Change
+                            class="disabled:bg-gray-300 w-full h-full bg-blue-500 text-white font-semibold">Change
                             Profile
                         </button>
                     </div>
                 </div>
 
-                <div class="profile-detail-container bg-white h-[500px] w-full flex flex-col p-3 rounded-sm gap-3">
-                    <h1 class="text-3xl">Profile detail</h1>
+                <div class="profile-detail-container bg-white h-[500px] w-full flex flex-col p-3 gap-3">
+                    <h1 class="desktop:text-3xl laptop:text-2xl">Profile detail</h1>
                     <div class="flex-1 bg-white">
                         <div class="flex flex-col gap-5">
                             <div class="flex flex-row gap-3">
-                                <span class="text-gray-400">ID #:</span>
-                                <span class="">{{ user.school_id }}</span>
+                                <span class="text-gray-400 laptop:text-sm desktop:text-base">Email:</span>
+                                <span class="laptop:text-sm desktop:text-base">{{ user.email }}</span>
                             </div>
                             <div class="flex flex-row gap-3">
-                                <span class="text-gray-400">Email:</span>
-                                <span class="">{{ user.email }}</span>
+                                <span class="text-gray-400 laptop:text-sm desktop:text-base">Phone no:</span>
+                                <span class=" laptop:text-sm desktop:text-base">{{ personalInfo ? personalInfo.phone_no : '' }}</span>
                             </div>
                             <div class="flex flex-row gap-3">
-                                <span class="text-gray-400">Phone no:</span>
-                                <span class="">{{ personalInfo ? personalInfo.phone_no : '' }}</span>
-                            </div>
-                            <div class="flex flex-row gap-3">
-                                <span class="text-gray-400">Gender:</span>
-                                <span class="capitalize">{{ user.gender }}</span>
+                                <span class="text-gray-400 laptop:text-sm desktop:text-base">Gender:</span>
+                                <span class="capitalize laptop:text-sm desktop:text-base">{{ user.gender }}</span>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <div class="flex-1 flex flex-col gap-10 p-5 pl-0">
-                <div class="personal-info-container bg-white flex-1 flex flex-col p-10 gap-3">
-                    <span class="text-3xl capitalize">Personal Information</span>
+            <div class="flex-1 flex flex-col desktop:gap-0 desktop:p-0 pl-0">
+                <div class="personal-info-container bg-white desktop:flex-1 laptop:h-full flex flex-col p-10 gap-3">
+                    <span class="desktop:text-3xl laptop:text-2xl capitalize">Personal Information</span>
                     <div class="bg-white flex-1 flex">
                         <div class="bg-white flex-1 flex flex-col gap-3">
                             <div class="flex flex-row gap-3">
-                                <span class="text-gray-400">Full name:</span>
-                                <span class="">{{ user.first_name }} {{ user.middle_name }} {{ user.last_name }}</span>
+                                <span class="text-gray-400 laptop:text-sm desktop:text-base">Full name:</span>
+                                <span class=" laptop:text-sm desktop:text-base">{{ user.first_name }} {{ user.middle_name }} {{ user.last_name }}</span>
                             </div>
                             <div class="flex flex-row gap-3">
-                                <span class="text-gray-400">Department:</span>
-                                <span class="">{{ user.department }}</span>
-                            </div>
-                            <div class="flex flex-row gap-3">
-                                <span class="text-gray-400">Position:</span>
+                                <span class="text-gray-400 laptop:text-sm desktop:text-base">Position:</span>
                                 <span class="capitalize">{{ user.position }}</span>
                             </div>
                             <div class="flex flex-row gap-3">
-                                <span class="text-gray-400">Address:</span>
-                                <span class="capitalize">{{ personalInfo ? personalInfo.address : '' }}</span>
+                                <span class="text-gray-400 laptop:text-sm desktop:text-base">Address:</span>
+                                <span class="capitalize laptop:text-sm desktop:text-base">{{ personalInfo ? personalInfo.address : '' }}</span>
                             </div>
                             <div class="flex flex-row gap-3">
-                                <span class="text-gray-400">Date of Birth:</span>
-                                <span class="">{{ personalInfo ? personalInfo.dob : '' }}</span>
+                                <span class="text-gray-400 laptop:text-sm desktop:text-base">Date of Birth:</span>
+                                <span class=" laptop:text-sm desktop:text-base">{{ personalInfo ? personalInfo.dob : '' }}</span>
                             </div>
                             <div class="flex flex-row gap-3">
-                                <span class="text-gray-400">Birth Place:</span>
-                                <span class="">{{ personalInfo ? personalInfo.birth_place : '' }}</span>
+                                <span class="text-gray-400 laptop:text-sm desktop:text-base">Birth Place:</span>
+                                <span class=" laptop:text-sm desktop:text-base">{{ personalInfo ? personalInfo.birth_place : '' }}</span>
                             </div>
                             <div class="flex flex-row gap-3">
-                                <span class="text-gray-400">Age:</span>
-                                <span class="">{{ personalInfo ? personalInfo.age : '' }}</span>
+                                <span class="text-gray-400 laptop:text-sm desktop:text-base">Age:</span>
+                                <span class=" laptop:text-sm desktop:text-base">{{ personalInfo ? personalInfo.age : '' }}</span>
                             </div>
                             <div class="flex flex-row gap-3">
-                                <span class="text-gray-400">Status:</span>
-                                <span class="">{{ personalInfo ? personalInfo.status : '' }}</span>
+                                <span class="text-gray-400 laptop:text-sm desktop:text-base">Status:</span>
+                                <span class=" laptop:text-sm desktop:text-base">{{ personalInfo ? personalInfo.status : '' }}</span>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="emergency-contact-container bg-white h-[250px] flex flex-col p-10 py-2">
-                    <span class="text-3xl capitalize">emergency contact</span>
-                    <div class="bg-white flex-1 flex flex-col gap-3 items-start justify-center">
-                        <div class="flex flex-row gap-3">
-                            <span class="text-gray-400">Full name:</span>
-                            <span class="">
+                <div class="emergency-contact-container bg-white desktop:h-[full laptop:h-full flex flex-col p-10 py-2">
+                    <span class="desktop:text-3xl laptop:text-2xl capitalize">emergency contact</span>
+                    <div class="flex-1 flex flex-col gap-3 items-start justify-start">
+                        <div class="flex flex-row gap-3 mt-5">
+                            <span class="text-gray-400 laptop:text-sm desktop:text-base">Full name:</span>
+                            <span class=" laptop:text-sm desktop:text-base">
                                 {{ emergencyContact ? emergencyContact.first_name : '' }}
                                 {{ emergencyContact ? emergencyContact.middle_name : '' }}
                                 {{ emergencyContact ? emergencyContact.last_name : '' }} </span>
                         </div>
                         <div class="flex flex-row gap-3">
-                            <span class="text-gray-400">Address:</span>
-                            <span class="">{{ emergencyContact ? emergencyContact.address : '' }}</span>
+                            <span class="text-gray-400 laptop:text-sm desktop:text-base">Address:</span>
+                            <span class=" laptop:text-sm desktop:text-base">{{ emergencyContact ? emergencyContact.address : '' }}</span>
                         </div>
                         <div class="flex flex-row gap-3">
-                            <span class="text-gray-400">Phone no:</span>
-                            <span class="">{{ emergencyContact ? emergencyContact.phone_no : '' }}</span>
+                            <span class="text-gray-400 laptop:text-sm desktop:text-base">Phone no:</span>
+                            <span class=" laptop:text-sm desktop:text-base">{{ emergencyContact ? emergencyContact.phone_no : '' }}</span>
                         </div>
                         <div class="flex flex-row gap-3">
-                            <span class="text-gray-400">Relationship:</span>
-                            <span class="">{{ emergencyContact ? emergencyContact.relationship : '' }}</span>
+                            <span class="text-gray-400 laptop:text-sm desktop:text-base">Relationship:</span>
+                            <span class=" laptop:text-sm desktop:text-base">{{ emergencyContact ? emergencyContact.relationship : '' }}</span>
                         </div>
                     </div>
                 </div>

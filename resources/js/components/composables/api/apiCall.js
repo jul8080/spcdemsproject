@@ -1,7 +1,8 @@
 import downloader from "./downloader"
-const apiCall = (result) => {
-    axios.get('/admin/user/logs-csve-xport', { params: { date: result } })
+const apiCall = (startDate, endDate) => {
+    axios.get('/admin/user/logs-csve-xport', { params: { startDate: startDate, endDate: endDate } })
         .then(res => {
+            // console.log(res.data.logs)
             const data = res.data.logs.map(x => {
                 const logs = {
                     last_name: x.last_name,
@@ -14,6 +15,7 @@ const apiCall = (result) => {
                 }
                 return logs
             })
+            // console.log(data)
             downloader(data)
         })
         .catch(err => {

@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="icon" type="image" href="{{ asset('images/samson.png') }}">
+    <!-- <link rel="icon" type="image" href="{{ asset('images/samson.png') }}"> -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
     @vite('resources/css/app.css')
     <script src="{{ asset('js/jquery-3.6.3.min.js') }}"></script>
@@ -24,14 +24,14 @@
                     {{-- email input  --}}
 
                 <div class="bg-gray-100 w-full h-12 before:block before:absolute before:bg-[#00B0F0] before:h-full before:w-1 before:left-0 relative mt-7">
-                    <input type="email" placeholder="Email" class="outline-none w-full pl-3 h-full bg-gray-50 caret-sky-500 focus:ring-1 focus:ring-[#00B0F0]" name="email">
+                    <input type="email" placeholder="Email" class="outline-none w-full pl-3 h-full bg-gray-100 caret-sky-500 focus:ring-1 focus:ring-[#00B0F0]" name="email">
                 </div>
                 <span class="text-xs text-red-500 font-semibold">@error('email') {{ $message }} @enderror</span>
 
                     {{-- password input  --}}
 
                 <div class="bg-gray-100 w-full h-12 before:block before:absolute before:bg-[#00B0F0] before:h-full before:w-1 before:left-0 relative">
-                    <input type="password" placeholder="Password" class="outline-none w-full pl-3 h-full bg-gray-50 caret-sky-500 focus:ring-1 focus:ring-[#00B0F0]"" name="password" >
+                    <input type="password" placeholder="Password" class="outline-none w-full pl-3 h-full bg-gray-100 caret-sky-500 focus:ring-1 focus:ring-[#00B0F0]"" name="password" >
                 </div>
                 <span class="text-xs text-red-500 font-semibold">@error('password') {{ $message }} @enderror</span>
 
@@ -45,7 +45,7 @@
                     {{-- button submit  --}}
 
                 <div class="bg-gray-100 w-full h-12 flex items-center gap-1">
-                    <button type="submit" class="btn btn-success transition">sign in</button>
+                    <button type="submit" class="btn btn-success transition rounded-md">sign in</button>
                 </div>
 
             </form>
@@ -79,12 +79,12 @@
                 @csrf
 
                 <div class="bg-gray-100 w-full h-12 before:block before:absolute before:bg-[#00B0F0] before:h-full before:w-1 before:left-0 relative mt-7">
-                    <input type="email" name="email" class="outline-none w-full pl-3 h-full bg-gray-50 caret-sky-500 focus:ring-1 focus:ring-[#00B0F0]" placeholder="Email" @if (Cookie::has('emailCookie')) value="{{ Cookie::get('emailCookie') }}" @endif >
+                    <input type="email" name="email" class="outline-none w-full pl-3 h-full bg-gray-100 caret-sky-500 focus:ring-1 focus:ring-[#00B0F0]" placeholder="Email" @if (Cookie::has('emailCookie')) value="{{ Cookie::get('emailCookie') }}" @endif >
                 </div>
                 <span class="text-xs text-red-500 font-semibold">@error('email') {{ $message }} @enderror</span>
 
                 <div class="bg-gray-100 w-full h-12 before:block before:absolute before:bg-[#00B0F0] before:h-full before:w-1 before:left-0 relative">
-                    <input type="password" name="password" class="outline-none w-full pl-3 h-full bg-gray-50 caret-sky-500 focus:ring-1 focus:ring-[#00B0F0]" placeholder="Password" @if (Cookie::has('pwdCookie')) value="{{ Cookie::get('pwdCookie') }}" @endif >
+                    <input type="password" name="password" class="outline-none w-full pl-3 h-full bg-gray-100 caret-sky-500 focus:ring-1 focus:ring-[#00B0F0]" placeholder="Password" @if (Cookie::has('pwdCookie')) value="{{ Cookie::get('pwdCookie') }}" @endif >
                 </div>
                 <span class="text-xs text-red-500 font-semibold">@error('password') {{ $message }} @enderror</span>
 
@@ -97,7 +97,7 @@
                     <label for="rememberme" class="text-sm font-semibold text-[#00B0F0] group-hover:cursor-pointer ml-2">Remember me</label>
                 </div>
                 <div class="w-full h-16 flex items-center">
-                    <button type="submit" class="btn btn-success transition">sign in</button>
+                    <button type="submit" class="btn btn-success transition rounded-md">sign in</button>
                 </div>
             </form>
         </div>

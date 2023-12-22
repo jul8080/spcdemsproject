@@ -19,27 +19,10 @@ class ScannerController extends Controller
         $dateNow = date('Y-m-d');
         $users = Log::where('date', $dateNow)->latest()->paginate(10);
 
-        // $logs = Log::where(['user_id' => '1', 'date' => '11/22/2023'])->get();
-
-        // $user = User::where('qrcode', 'SPCD-000000')->first();
-        // $logs = \App\Models\User::with('logs')->get();
-        // $user = \App\Models\Log::with('user')->get();
-        // $x = Log::where(['date' => '11/21/2023', 'user_id' => '2'])->first();
-
-        // return $x->update(['date' => '11/23/2023']);
-        // return $logs;
-
-        if ($users->count() > 0) {
-            return response()->json([
-                'status' => 200,
-                'users' => $users
-            ], 200);
-        } else {
-            return response()->json([
-                'status' => 404,
-                'message' => 'No logs found!'
-            ], 404);
-        }
+        return response()->json([
+            'status' => 200,
+            'users' => $users
+        ], 200);
     }
     public function index()
     {
@@ -56,13 +39,6 @@ class ScannerController extends Controller
     }
     public function store(Request $request)
     {
-        //  $dt = Carbon::now();
-        //  $dateNow = date('Y-m-d');
-        // return response()->json([
-        //                  'status' => 1,
-        //                  'message' => $request->all(),
-        //                  'day' => $dateNow,
-        //              ]);
 
         $dt = Carbon::now();
         $dateNow = date('Y-m-d');
@@ -76,7 +52,7 @@ class ScannerController extends Controller
                 ]);
                 return response()->json([
                     'status' => 1,
-                    'message' => 'You successfully Time Out.',
+                    'success_time_out' => 'You successfully Time Out.',
                 ]);
             } else {
                 Log::create([
@@ -92,13 +68,13 @@ class ScannerController extends Controller
 
                 return response()->json([
                     'status' => 1,
-                    'message' => 'You successfully Time In.',
+                    'success_time_in' => 'You successfully Time In.',
                 ]);
             }
         } else {
             return response()->json([
                 'status' => 0,
-                'message' => 'Sorry no data found, please contact your administrator',
+                'fail' => 'Sorry no data found, please contact your administrator',
             ]);
         }
     }

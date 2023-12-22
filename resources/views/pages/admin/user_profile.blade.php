@@ -27,8 +27,8 @@
             @else
                 <div class="flex items-center gap-2">
                     <div class="bg-slate-700 w-24 h-24 rounded-md items-center flex justify-center">
-                        <div class="w-16 h-16 flex justify-center items-start">
-                            <span class="text-white font-bold text-6xl capitalize">{{ $user->first_name[0] }}</span>
+                        <div class="w-16 h-16 flex justify-center items-center">
+                            <span class="text-white font-bold text-4xl capitalize">{{ $user->first_name[0] }}{{ $user->last_name[0] }}</span>
                         </div>
                     </div>
                     <div class="flex flex-col">

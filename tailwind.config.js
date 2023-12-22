@@ -6,6 +6,13 @@ module.exports = {
     "./resources/**/*.vue",
   ],
   theme: {
+    screens: {
+      desktop: '1300px',
+      laptop: '992px',
+      tablet: '768px',
+      phone: '600px'
+    },
+
     extend: {
         animation: {
              spin: "spin 1.5s linear infinite",

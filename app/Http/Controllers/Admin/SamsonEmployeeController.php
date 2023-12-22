@@ -2,18 +2,79 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Models\Log;
 use App\Models\User;
 use App\Models\Attendance;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
-use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
-use App\Models\Log;
 
 class SamsonEmployeeController extends Controller
 {
+    public function resetPassword()
+    {
+        return view('pages.admin.reset_password');
+    }
+    public function confirmEmail(Request $request)
+    {
+        $request->validate([
+            'email' => 'required|email',
+        ]);
+
+        $user = User::where(['role_as' => 'user', 'email' => $request->input('email')])->first();
+        if($user) {
+            $user->update([
+                'password' => ''
+            ]);
+            return response()->json([
+                'user' => $user,
+                'success' => 'Password successfully reset.'
+            ]);
+        }
+        return response()->json(['message' => 'Email not found, please enter a valid email.']);
+    }
+    public function newPassword(Request $request, $id)
+    {
+        $user = User::findOrFail($id);
+        // dd($user);
+        return view('pages.admin.new_password', compact('user'));
+    }
+    public function submitNewPassword(Request $request) {
+
+        $request->validate([
+            'password'    => 'required|min:6|required_with:password_confirmation|same:password_confirmation',
+            'password_confirmation' => 'required|min:5'
+        ]);
+
+        $user = User::findOrFail($request->id);
+
+        $user->update([
+            'password' => Hash::make($request->password)
+        ]);
+         return response()->json([
+             'message' => 'Password change successfull.'
+         ]);
+    }
+    public function editPosition(Request $request) 
+    {
+        $user = User::findOrFail($request->id);
+        return response()->json([
+            'user' => $user,
+        ]);
+    }
+    public function storePosition(Request $request)
+    {
+        $user = User::findOrFail($request->id);
+        $user->update([
+            'position' => $request->position
+        ]);
+        return response()->json([
+            'success' => 'Successfully updated.'
+        ]);
+    }
     public function userLists(Request $request)
     {
         $dateNow = Carbon::now();
@@ -37,12 +98,15 @@ class SamsonEmployeeController extends Controller
     }
     public function exportLogs(Request $request)
     {
+    
         $query = Log::query();
-        if ($request->has('date')) {
-            $date = $request->input('date');
-            $query->whereDate('created_at', 'like', "%$date%");
+        if ($request->has('startDate')) {
+            $query->whereDate('created_at', '>=', $request->input('startDate'));
         }
-        $logs = $query->latest()->get();
+        if ($request->has('endDate')) {
+            $query->whereDate('created_at', '<=', $request->input('endDate'));
+        }
+        $logs = $query->get();
         return response()->json([
             'status' => 200,
             'logs' => $logs
@@ -59,7 +123,7 @@ class SamsonEmployeeController extends Controller
                     ->orWhere('middle_name', 'like', "%$search%");
             });
         }
-        $users = $query->latest()->paginate(5);
+        $users = $query->where('role_as', 'user')->latest()->paginate(5);
         return response()->json([
             'status' => 200,
             'users' => $users
@@ -75,20 +139,21 @@ class SamsonEmployeeController extends Controller
     }
     public function employeelogs(Request $request)
     {
+        $request->validate([
+            'startDate' => 'date',
+            'endDate' => 'date|after:startDate',
+        ]);
         $query = Log::query();
+        if ($request->has('startDate')) {
+            $query->whereDate('created_at', '>=', $request->input('startDate'));
+        }
+        if ($request->has('endDate')) {
+            $query->whereDate('created_at', '<=', $request->input('endDate'));
+        }
+        $logs = $query->paginate(5);
 
-        if ($request->has('filter')) {
-            $filter = $request->input('filter');
-            $query->where('day', 'like', "%$filter%");
-        }
-        if ($request->has('date')) {
-            $date = $request->input('date');
-            $query->whereDate('created_at', 'like', "%$date%");
-        }
-        $logs = $query->latest()->paginate(5);
         return response()->json([
-            'status' => 200,
-            'attendance' => $logs
+            'logs' => $logs
         ], 200);
     }
     public function homePage(Request $request)

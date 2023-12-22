@@ -24,9 +24,7 @@ class ProfileSettingsController extends Controller
             'first_name' => 'required',
             'last_name' => 'required',
             'middle_name' => 'required',
-            'department' => 'required',
             'position' => 'required',
-            'school_id' => 'required',
             'gender' => 'required',
             'email' => 'required|email',
         ]);
@@ -36,9 +34,7 @@ class ProfileSettingsController extends Controller
             $user->first_name = $request->first_name;
             $user->last_name = $request->last_name;
             $user->middle_name = $request->middle_name;
-            $user->department = $request->department;
             $user->position = $request->position;
-            $user->school_id = $request->school_id;
             $user->gender = $request->gender;
             $user->email = $request->email;
             $user->update();

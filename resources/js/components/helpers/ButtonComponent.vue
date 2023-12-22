@@ -1,11 +1,10 @@
 <template>
-    <div class="flex gap-2 h-[50px] bg-white items-center px-5">
+    <div class="flex gap-2 h-full bg-white items-center px-5">
         <button 
         @click="prevPage" :disabled="page === 1" 
-        class="flex items-center justify-center gap-1 disabled:text-gray-300">
+        class="flex items-center justify-center gap-1 disabled:text-gray-300 desktop:text-base laptop:text-sm">
         <i class="fa-solid fa-angle-left"></i>Prev
         </button>
-
         <div>
             <!-- <button 
             class="px-2 border"
@@ -14,19 +13,15 @@
             > 
             {{ index }}
             </button> -->
-            <span>{{ page }} of {{ totalPages }}</span>
+            <span class="desktop:text-base laptop:text-sm">{{ page }} of {{ totalPages }}</span>
         </div>
-
         <button 
         @click="nextPage" 
         :disabled="page === totalPages"
-        class="flex items-center justify-center gap-1 disabled:text-gray-300"
+        class="flex items-center justify-center gap-1 disabled:text-gray-300 desktop:text-base laptop:text-sm"
             >Next 
             <i class="fa-solid fa-angle-right"></i>
         </button>
-
-       
-
     </div>
 </template>
 

@@ -1,5 +1,5 @@
 import { ref } from 'vue'
-const composableApi = (filter) => {
+const composableApi = (api, startDate, endDate) => {
     const loading = ref(false)
     const logs = ref([])
     const pages = ref(1)
@@ -7,7 +7,7 @@ const composableApi = (filter) => {
     const getApiLogs = async (page) => {
         loading.value = true
         try {
-            const res = await axios.get(`/admin/api-logs?page=${page}&filter=${filter.day}&date=${filter.date}`)
+            const res = await axios.get(`${api}?page=${page}&beginDate=${startDate}&endDate=${endDate}`)
             logs.value = res.data.attendance.data
             pages.value = res.data.attendance.current_page
             totalPages.value = res.data.attendance.last_page

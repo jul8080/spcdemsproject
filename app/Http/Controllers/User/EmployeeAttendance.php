@@ -16,21 +16,27 @@ use App\Models\Log;
 class EmployeeAttendance extends Controller
 {
     public function logs(Request $request)
-    {
-        $query = Log::query();
-        if ($request->has('beginDate')) {
-            $beginDate = $request->input('beginDate');
-            $query->whereDate('created_at', 'like', "%$beginDate%");
-        }
-        if ($request->has('endDate')) {
-            $endDate = $request->input('endDate');
-            $query->whereDate('created_at', 'like', "%$endDate%");
-        }
+    {   
+        $request->validate([
+            'startDate' => 'date',
+            'endDate' => 'date|after:startDate',
+        ]);
+        $user = auth()->user();
+        $query = Log::where('user_id', $user->id);
+
      
-        $log = $query->where('user_id', Auth::id())->latest()->paginate(5);
+         if ($request->has('startDate')) {
+             $query->whereDate('created_at', '>=', $request->input('startDate'));
+         }
+
+         if ($request->has('endDate')) {
+            $query->whereDate('created_at', '<=', $request->input('endDate'));
+        }
+
+
+        $logs = $query->paginate(5);
         return response()->json([
-            'status' => 1,
-            'logs' => $log,
+            'logs' => $logs
         ]);
     }
     public function attendancePage(Request $request)

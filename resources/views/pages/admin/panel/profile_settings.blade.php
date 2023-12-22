@@ -1,16 +1,16 @@
 @extends('layouts.setting')
 @section('content')
-<div class="w-full h-ful p-2 flex items-center justify-center flex-col gap-1">
-    <div class="bg-white w-[1000px] h-[100px] flex items-center">
-        <span class="material-symbols-outlined font-semibold text-6xl text-gray-400">
+<div class="w-full h-ful desktop:p-2 laptop:p-5 flex desktop:items-center desktop:justify-center laptop:justify-center flex-col gap-1">
+    <div class="bg-white desktop:w-[1000px] h-[100px] flex items-center">
+        <span class="material-symbols-outlined font-semibold desktop:text-6xl laptop:text-5xl text-gray-400">
             admin_panel_settings
         </span>
-        <span class="text-3xl font-semibold text-gray-400">Admin Panel Settings</span>
+        <span class="desktop:text-3xl laptop:text-2xl font-semibold text-gray-400">Admin Panel Settings</span>
     </div>
-    <div class="w-[1000px] h-[500px] rounded-md flex flex-col gap-2">
+    <div class="desktop:w-[1000px] h-[500px] rounded-md flex flex-col gap-2">
         <div  class="flex gap-1">
             <div class="bg-slate-700 w-[100px] h-[90px] flex items-center justify-center">
-                <span class="material-symbols-outlined text-6xl text-white">
+                <span class="material-symbols-outlined desktop:text-6xl laptop:text-4xl text-white">
                     manage_accounts
                 </span>
             </div>
@@ -35,46 +35,38 @@
                     <div class="flex">
                         <div class="flex-1 flex flex-col gap-5">
                             <div class="flex gap-2 items-center">
-                                <div class="flex-1 text-end"><label for="first_name">First Name</label></div>
+                                <div class="flex-1 text-end laptop:text-xs desktop:text-sm"><label for="first_name">First Name</label></div>
                                 <div class="flex-1">
-                                    <input disabled type="text" name="first_name" class="w-full outline-none caret-[#00B0F0] pl-2 py-[.3rem] focus:ring-1 bg-gray-50 text-sm" value="{{ $user->first_name }}">
+                                    <input disabled type="text" name="first_name" class="desktop:text-sm laptop:text-xs w-full outline-none caret-[#00B0F0] pl-2 py-[.3rem] focus:ring-1 bg-gray-100 text-sm" value="{{ $user->first_name }}">
                                 </div>
                             </div>
                             <div class="flex gap-2 items-center">
-                                <div class="flex-1 text-end"><label for="last_name">Last Name</label></div>
-                                <div class="flex-1"><input disabled type="text" name="last_name" class="w-full outline-none caret-[#00B0F0] pl-2 py-[.3rem] focus:ring-1 bg-gray-50 text-sm" value="{{ $user->last_name }}"></div>
+                                <div class="flex-1 text-end laptop:text-xs desktop:text-sm"><label for="last_name">Last Name</label></div>
+                                <div class="flex-1"><input disabled type="text" name="last_name" class="desktop:text-sm laptop:text-xs w-full outline-none caret-[#00B0F0] pl-2 py-[.3rem] focus:ring-1 bg-gray-100 text-sm" value="{{ $user->last_name }}"></div>
                             </div>
                             <div class="flex gap-2 items-center">
-                                <div class="flex-1 text-end"><label for="middle_name">Middle Name</label></div>
-                                <div class="flex-1"><input disabled type="text" name="middle_name" class="w-full outline-none caret-[#00B0F0] pl-2 py-[.3rem] focus:ring-1 bg-gray-50 text-sm" value="{{ $user->middle_name }}"></div>
-                            </div>
-                            <div class="flex gap-2 items-center">
-                                <div class="flex-1 text-end"><label for="department">Department</label></div>
-                                <div class="flex-1"><input disabled type="text" name="department" class="w-full outline-none caret-[#00B0F0] pl-2 py-[.3rem] focus:ring-1 bg-gray-50 text-sm" value="{{ $user->department }}"></div>
+                                <div class="flex-1 text-end laptop:text-xs desktop:text-sm"><label for="middle_name">Middle Name</label></div>
+                                <div class="flex-1"><input disabled type="text" name="middle_name" class="desktop:text-sm laptop:text-xs w-full outline-none caret-[#00B0F0] pl-2 py-[.3rem] focus:ring-1 bg-gray-100 text-sm" value="{{ $user->middle_name }}"></div>
                             </div>
                         </div>
 
                         <div class="flex-1 flex flex-col gap-5 mr-32">
                             <div class="flex gap-2 items-center">
-                                <div class="flex-1 text-end"><label for="position">Position</label></div>
-                                <div class="flex-1"><input disabled type="text" name="position" class="w-full outline-none caret-[#00B0F0] pl-2 py-[.3rem] focus:ring-1 bg-gray-50 text-sm" value="{{ $user->position }}"></div>
+                                <div class="flex-1 text-end laptop:text-xs desktop:text-sm"><label for="position">Position</label></div>
+                                <div class="flex-1"><input disabled type="text" name="position" class="laptop:text-xs desktop:text-sm w-full outline-none caret-[#00B0F0] pl-2 py-[.3rem] focus:ring-1 bg-gray-100 text-sm" value="{{ $user->position }}"></div>
                             </div>
                             <div class="flex gap-2 items-center">
-                                <div class="flex-1 text-end"><label for="school_id">ID No</label></div>
-                                <div class="flex-1"><input disabled type="text" name="school_id" class="w-full outline-none caret-[#00B0F0] pl-2 py-[.3rem] focus:ring-1 bg-gray-50 text-sm" value="{{ $user->school_id }}"></div>
-                            </div>
-                            <div class="flex gap-2 items-center">
-                                <div class="flex-1 text-end"><label for="gender">Gender</label></div>
+                                <div class="flex-1 text-end laptop:text-xs desktop:text-sm"><label for="gender">Gender</label></div>
                                 <div class="flex-1" >
-                                    <select disabled name="gender" class="w-full outline-none caret-[#00B0F0] pl-2 py-[.3rem] focus:ring-1 bg-gray-50 text-sm">
+                                    <select disabled name="gender" class="w-full outline-none caret-[#00B0F0] pl-2 py-[.3rem] focus:ring-1 bg-gray-100 laptop:text-xs desktop:text-sm">
                                         <option value="male" {{ $user->gender == 'male' ? 'selected' : '' }}>Male</option>
                                         <option value="female" {{ $user->gender == 'female' ? 'selected' : '' }}>Female</option>
                                     </select>
                                 </div>
                             </div>
-                            <div class="flex gap-2">
-                                <div class="flex-1 text-end"><label for="email">Email</label></div>
-                                <div class="flex-1"><input disabled type="text" name="email" class="w-full outline-none caret-[#00B0F0] pl-2 py-[.3rem] focus:ring-1 bg-gray-50 text-sm " value="{{ $user->email }}"></div>
+                            <div class="flex gap-2 items-center">
+                                <div class="flex-1 text-end laptop:text-xs desktop:text-sm"><label for="email">Email</label></div>
+                                <div class="flex-1"><input disabled type="text" name="email" class="laptop:text-xs desktop:text-sm w-full outline-none caret-[#00B0F0] pl-2 py-[.3rem] focus:ring-1 bg-gray-100 text-sm " value="{{ $user->email }}"></div>
                             </div>
                         </div>
                     </div>

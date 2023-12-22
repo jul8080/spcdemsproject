@@ -1,32 +1,33 @@
 <template>
-    <div class="w-full h-full flex flex-col">
-        <div class="flex-1 flex gap-5">
+    <div class="w-full h-full flex flex-col gap-10">
+
+        <!-- form success message starts here. -->
+        <div v-show="success" class="bg-green-300 w-full h-16 rounded-md flex items-center justify-center">
+            <span class="text-white font-semibold">{{ success }}</span>
+        </div>
+        <!-- form success message ends here. -->
+
+        <div class="h-full w-full flex flex-wrap desktop:gap-5 laptop:gap-2">
             <!-- row 1 -->
             <div class="flex-1 flex flex-col gap-1">
-                <div class="h-[70px] flex flex-col">
-                    <label class="uppercase text-sm">id</label>
-                    <input type="text" class="h-full bg-gray-200 pl-5 rounded-md" v-model="employee.school_id" name="school_id">
-                </div>
-                <!-- error message starts here... -->
-                <span class="text-xs text-red-500" v-show="message.school_id" v-for="school_id in message.school_id">{{ school_id }}</span>
-                <!-- error message ends here... -->
+
                 <div class="h-[70px] flex flex-col">
                     <label class="capitalize text-sm">first name</label>
-                    <input type="text" class="h-full bg-gray-200 pl-5 rounded-md" v-model="employee.first_name" name="first_name">
+                    <input type="text" class="h-full bg-gray-200 pl-5 rounded-md laptop:text-xs desktop:text-sm focus:outline-blue-500" v-model="employee.first_name" name="first_name">
                 </div>
                 <!-- error message starts here... -->
                 <span class="text-xs text-red-500" v-show="message.first_name" v-for="first_name in message.first_name">{{ first_name }}</span>
                 <!-- error message ends here... -->
                 <div class="h-[70px] flex flex-col">
                     <label class="capitalize text-sm">last name</label>
-                    <input type="text" class="h-full bg-gray-200 pl-5 rounded-md" v-model="employee.last_name" name="last_name">
+                    <input type="text" class="h-full bg-gray-200 pl-5 rounded-md laptop:text-xs desktop:text-sm focus:outline-blue-500" v-model="employee.last_name" name="last_name">
                 </div>
                 <!-- error message starts here... -->
                 <span class="text-xs text-red-500" v-show="message.last_name" v-for="last_name in message.last_name">{{ last_name }}</span>
                 <!-- error message ends here... -->
                 <div class="h-[70px] flex flex-col">
                     <label class="uppercase text-sm">m.i</label>
-                    <input type="text" class="h-full bg-gray-200 pl-5 rounded-md" v-model="employee.middle_name" name="middle_name">
+                    <input type="text" class="h-full bg-gray-200 pl-5 rounded-md laptop:text-xs desktop:text-sm focus:outline-blue-500" v-model="employee.middle_name" name="middle_name">
                 </div>
                 <!-- error message starts here... -->
                 <span class="text-xs text-red-500" v-show="message.middle_name" v-for="middle_name in message.middle_name">{{ middle_name }}</span>
@@ -35,23 +36,12 @@
             <!-- row 2 -->
             <div class="flex-1 flex flex-col gap-1">
                 <div class="h-[70px] flex flex-col">
-                    <label class="capitalize text-sm">department</label>
-                    <select v-model="employee.department" class="h-full bg-gray-200 pl-5 rounded-md" name="department">
-                        <option value="" selected>--</option>
-                        <option value="BSIT" class="bg-white">IT</option>
-                        <option value="BSBA" class="bg-white">BSBA</option>
-                    </select>
-                </div>
-                <!-- error message starts here... -->
-                <span class="text-xs text-red-500" v-show="message.department" v-for="department in message.department">{{ department }}</span>
-                <!-- error message ends here... -->
-                <div class="h-[70px] flex flex-col">
                     <label class="capitalize text-sm">position</label>
-                    <select v-model="employee.position" class="h-full bg-gray-200 pl-5 rounded-md" name="position">
+                    <select v-model="employee.position" class="h-full bg-gray-200 pl-5 rounded-md laptop:text-xs desktop:text-sm focus:outline-blue-500" name="position">
                         <option value="" selected>Select</option>
-                        <option value="employee" class="bg-white">Employee</option>
-                        <option value="secretary" class="bg-white">Secretary</option>
-                        <option value="checker" class="bg-white">Checker</option>
+                        <option value="employee" class="bg-white laptop:text-xs desktop:text-sm">Employee</option>
+                        <option value="secretary" class="bg-white laptop:text-xs desktop:text-sm">Secretary</option>
+                        <option value="checker" class="bg-white laptop:text-xs desktop:text-sm">Checker</option>
                     </select>
                 </div>
                 <!-- error message starts here... -->
@@ -59,14 +49,18 @@
                 <!-- error message ends here... -->
                 <div class="h-[70px] flex flex-col">
                     <label class="capitalize text-sm">email</label>
-                    <input type="email" class="h-full bg-gray-200 pl-5 rounded-md" v-model="employee.email" name="email">
+                    <input type="email" class="h-full bg-gray-200 pl-5 rounded-md laptop:text-xs desktop:text-sm focus:outline-blue-500" v-model="employee.email" name="email">
                 </div>
                 <!-- error message starts here... -->
                 <span class="text-xs text-red-500" v-show="message.email" v-for="email in message.email">{{ email }}</span>
                 <!-- error message ends here... -->
                 <div class="h-[70px] flex flex-col">
-                    <label class="capitalize text-sm">gender</label>
-                    <input type="text" class="h-full bg-gray-200 pl-5 rounded-md" v-model="employee.gender" name="gender">
+                    <label class="capitalize text-sm laptop:text-xs desktop:text-sm">gender</label>
+                    <select v-model="employee.gender" class="h-full bg-gray-200 pl-5 rounded-md laptop:text-xs desktop:text-sm focus:outline-blue-500" name="gender">
+                        <option value="" selected>Select</option>
+                        <option value="male" class="bg-white laptop:text-xs desktop:text-sm">Male</option>
+                        <option value="female" class="bg-white laptop:text-xs desktop:text-sm">Female</option>
+                    </select>
                 </div>
                 <!-- error message starts here... -->
                 <span class="text-xs text-red-500" v-show="message.gender" v-for="gender in message.gender">{{ gender }}</span>
@@ -76,21 +70,19 @@
             <div class="flex-1 flex flex-col gap-1">
                 <div class="h-[70px] flex flex-col">
                     <label class="capitalize text-sm">password</label>
-                    <input type="password" class="h-full bg-gray-200 pl-5 rounded-md" v-model="employee.password" name="password">
+                    <input type="password" class="h-full bg-gray-200 pl-5 rounded-md laptop:text-xs desktop:text-sm focus:outline-blue-500" v-model="employee.password" name="password">
                 </div>
                 <!-- error message starts here... -->
                 <span class="text-xs text-red-500" v-show="message.password" v-for="password in message.password">{{ password }}</span>
                 <!-- error message ends here... -->
                 <div class="h-[70px] flex flex-col">
                     <label class="capitalize text-sm">confirm password</label>
-                    <input type="password" class="h-full bg-gray-200 pl-5 rounded-md" v-model="employee.password_confirmation" name="confirm_password">
+                    <input type="password" class="h-full bg-gray-200 pl-5 rounded-md laptop:text-xs desktop:text-sm focus:outline-blue-500" v-model="employee.password_confirmation" name="confirm_password">
                 </div>
                 <!-- error message starts here... -->
                 <span class="text-xs text-red-500" v-show="message.password_confirmation" v-for="password_confirmation in message.password_confirmation">{{ password_confirmation }}</span>
                 <!-- error message ends here... -->
-                <div class="h-[70px] flex flex-col">
-                    <input type="hidden" class="h-full bg-gray-200 pl-5 rounded-md" v-model="employee.new_user" name="new_user">
-                </div>
+       
             </div>
 
         </div>
@@ -136,7 +128,7 @@ export default {
                 password: '',
                 password_confirmation: '',
             },
-            x: []
+            success: ''
         }
     },
     mounted() {},
@@ -151,11 +143,24 @@ export default {
             this.processing = true
             try {
                 const res = await axios.post("/admin/create/employee", this.employee)
-                // this.error.school_id = res.data.fail[0]
-                // for(let x = 0; x < res.data.fail.length; x++) {
-                //     console.log(res.data.fail)
-                // }
-                console.log(res.data)
+                if(res.data.status === 200) {
+                    this.employee.new_user = ''
+                    this.employee.school_id = ''
+                    this.employee. first_name = ''
+                    this.employee.last_name = ''
+                    this.employee.middle_name = ''
+                    this.employee.department = ''
+                    this.employee.position = ''
+                    this.employee.email = ''
+                    this.employee.gender = ''
+                    this.employee.password = ''
+                    this.employee.password_confirmation = ''
+                    this.success = res.data.message
+                    setTimeout(() => {
+                        this.success = ''
+                    },3000)
+                    console.log(res.data.message)
+                }
             } catch(error) {
                 if (error.response.status === 422) {
                     this.message.school_id = error.response.data.errors.school_id
@@ -168,10 +173,20 @@ export default {
                     this.message.gender = error.response.data.errors.gender
                     this.message.password = error.response.data.errors.password
                     this.message.password_confirmation = error.response.data.errors.password_confirmation
+                    setTimeout(() => {
+                        this.message.school_id = ''
+                        this.message.first_name = ''
+                        this.message.last_name = ''
+                        this.message.middle_name = ''
+                        this.message.department = ''
+                        this.message.position = ''
+                        this.message.email = ''
+                        this.message.gender = ''
+                        this.message.password = ''
+                        this.message.password_confirmation = ''
+                    },5000)
                     console.log(error.response.data)
                 }
-
-                
             } finally {
                 this.processing = false
                 this.getAllUsers()

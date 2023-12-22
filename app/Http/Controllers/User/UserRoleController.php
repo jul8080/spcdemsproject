@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\User;
 
 use Carbon\Carbon;
+use App\Models\Log;
 use App\Models\Attendance;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -15,6 +16,24 @@ use App\Models\EmergencyContactInformation;
 
 class UserRoleController extends Controller
 {
+    public function userData(Request $request)
+    {
+
+        // $authenticated = User::findOrFail(Auth::id());
+        // $users = User::where('role_as', 'user')->get();
+        // $maleCount = User::where(['role_as' => 'user','gender' => 'male'])->count();
+        // $femaleCount = User::where(['role_as' => 'user','gender' => 'female'])->count();
+        // $countNewUsers = User::whereDate('created_at', $dateNow)->where('role_as', 'user')->count();
+        $user = auth()->user();
+
+        $logs = Log::where('user_id', $user->id)->latest()->paginate(3);
+        $totalLogs = Log::where(['user_id' => $user->id])->count();
+        return response()->json([
+            'user' => $user,
+            'recentLogs' => $logs,
+            'totalLogs' => $totalLogs
+        ]);
+    }
     public function getImage() 
     {
         $image = User::findOrFail(Auth::id());

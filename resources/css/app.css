@@ -110,7 +110,7 @@
         /* @apply block; */
     }
     .active {
-        @apply bg-gray-50 font-bold !text-sky-500 rounded-tl-md rounded-bl-md;
+        @apply bg-gray-50 !text-sky-500 rounded-tl-md rounded-bl-md;
     }
 }
 
