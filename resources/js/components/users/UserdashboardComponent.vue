@@ -36,7 +36,7 @@
                     </div>
                 </div>
                 <div class="bg-orange-300 rounded-md flex flex-col justify-between desktop:p-5 laptop:p-2">
-                    <i class="fa-regular fa-clock text-white self-end desktop:text-3xl laptop:text-lg"></i>
+                    <i class="fa-regular fa-calendar text-white self-end desktop:text-3xl laptop:text-lg"></i>
                     <div>
                         <span class="block text-white desktop:text-3xl laptop:text-2xl">Schedule</span>
                         <div>
@@ -55,30 +55,30 @@
                     <div v-for="(log, index) in logs" :key="index"
                         class="odd:bg-white bg-gray-100 rounded-md w-full desktop:h-[92px] laptop:h-full flex overflow-hidden desktop:p-5">
                         <div class="flex-1 flex items-center justify-between border-r-[1px] p-5">
-                            <div class="flex items-center justify-center flex-col">
+                            <div class="flex items-center justify-center flex-col flex-wrap">
                                 <span class="block text-gray-400 text-xs">Day</span>
                                 <span class="capitalize desktop:text-base laptop:text-xs">{{ log.day }}</span>
                             </div>
-                            <div class="flex items-center justify-center flex-col">
+                            <div class="flex items-center justify-center flex-col flex-wrap">
                                 <span class="block text-gray-400 text-xs">Time In</span>
                                 <span class="capitalize desktop:text-base laptop:text-xs">{{ log.time_in !== null ? log.time_in : '--' }}</span>
                             </div>
-                            <div class="flex items-center justify-center flex-col">
+                            <div class="flex items-center justify-center flex-col flex-wrap">
                                 <span class="block text-gray-400 text-xs">Date</span>
                                 <span class="capitalize desktop:text-base laptop:text-xs">{{ dateConverter(log.created_at) }}</span>
                             </div>
                         </div>
 
                         <div class="flex-1 flex items-center justify-between p-5">
-                            <div class="flex items-center justify-center flex-col">
+                            <div class="flex items-center justify-center flex-col flex-wrap">
                                 <span class="block text-gray-400 text-xs">Day</span>
                                 <span class="capitalize desktop:text-base laptop:text-xs">{{ log.day }}</span>
                             </div>
-                            <div class="flex items-center justify-center flex-col">
+                            <div class="flex items-center justify-center flex-col flex-wrap">
                                 <span class="block text-gray-400 text-xs">Time Out</span>
                                 <span class="capitalize desktop:text-base laptop:text-xs">{{ log.time_out !== null ? log.time_out : '--' }}</span>
                             </div>
-                            <div class="flex items-center justify-center flex-col">
+                            <div class="flex items-center justify-center flex-col flex-wrap">
                                 <span class="block text-gray-400 text-xs">Date</span>
                                 <span class="capitalize desktop:text-base laptop:text-xs">{{ dateConverter(log.created_at) }}</span>
                             </div>

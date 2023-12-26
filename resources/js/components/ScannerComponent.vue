@@ -85,12 +85,11 @@
                     <span class="font-mono font-extrabold text-slate-300">
                         <i class="fa-solid fa-qrcode desktop:text-base laptop:text-sm"></i> Tap your QRCode here.
                     </span>
-                    <span v-show="fail" class="font-semibold text-red-400 desktop:text-base laptop:text-sm">{{ fail
-                    }}</span>
-                    <span v-show="successTimeIn" class="font-semibold text-green-400 desktop:text-base laptop:text-sm">{{
-                        successTimeIn }}</span>
-                    <span v-show="successTimeOut" class="font-semibold text-green-400 desktop:text-base laptop:text-sm">{{
-                        successTimeOut }}</span>
+                    <!-- message success & error starts here... -->
+                    <span v-show="fail" class="font-semibold text-red-400 desktop:text-base laptop:text-sm">{{ fail }}</span>
+                    <span v-show="successTimeIn" class="font-semibold text-green-400 desktop:text-base laptop:text-sm">{{ successTimeIn }}</span>
+                    <span v-show="successTimeOut" class="font-semibold text-green-400 desktop:text-base laptop:text-sm">{{ successTimeOut }}</span>
+                    <!-- message success & error ends here... -->
                 </div>
             </div>
             <!-- qr scanner starts here... -->

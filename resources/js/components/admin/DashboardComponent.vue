@@ -57,17 +57,17 @@
                 <div v-if="newUsers.length > 0" class="h-[300px] w-full bg-gray-200 grid grid-rows-3 justify-items-center items-center p-2 rounded-md">
                     <div v-for="(user, index) in newUsers" :key="index"
                         class="odd:bg-white bg-gray-100 rounded-md w-full h-[92px] flex overflow-hidden p-5">
-                        <div class="flex-1 flex flex-col items-center justify-center border-r-[1px]">
+                        <div class="flex-1 flex flex-col items-center justify-center border-r-[1px] flex-wrap">
                             <span class="block text-gray-400 text-xs">Full name</span>
-                            <span class="capitalize laptop:text-sm">{{ user.first_name }} {{ user.middle_name[0] }}. {{ user.last_name }}</span>
+                            <span class="capitalize laptop:text-xs desktop:text-sm">{{ user.first_name }} {{ user.middle_name[0] }}. {{ user.last_name }}</span>
                         </div>
-                        <div class="flex-1 flex flex-col items-center justify-center border-r-[1px]">
+                        <div class="flex-1 flex flex-col items-center justify-center border-r-[1px] flex-wrap">
                             <span class="block text-gray-400 text-xs">Position</span>
-                            <span class="capitalize laptop:text-sm">{{ user.position }}</span>
+                            <span class="capitalize laptop:text-xs desktop:text-sm">{{ user.position }}</span>
                         </div>
-                        <div class="flex-1 flex flex-col items-center justify-center">
+                        <div class="flex-1 flex flex-col items-center justify-center flex-wrap">
                             <span class="block text-gray-400 text-xs">Email</span>
-                            <span class="laptop:text-sm">{{ user.email }}</span>
+                            <span class="laptop:text-xs desktop:text-sm">{{ user.email }}</span>
                         </div>
                     </div>
                 </div>
